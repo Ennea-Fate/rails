@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fn: MyString
+  sn: MyString
+  ln: MyString
+  birthdate: 2017-04-27
+  TIN: 1
+  passport: 1
+
+two:
+  fn: MyString
+  sn: MyString
+  ln: MyString
+  birthdate: 2017-04-27
+  TIN: 1
+  passport: 1

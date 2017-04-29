@@ -1,0 +1,34 @@
+= form_for @order do |f|
+  - if @order.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
+      %ul
+        - @order.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :date
+    = f.text_field :date, id: 'datepicker_date'
+  .field
+    = f.label :time
+    = f.time_select :time
+  .field
+    = f.label :from_adress
+    = f.text_area :from_adress
+  .field
+    = f.label :to_adress
+    = f.text_area :to_adress
+  .field
+    = f.label :passangers_count
+    = f.number_field :passangers_count
+  .field
+    = f.label :lenght_of_the_route
+    = f.text_field :lenght_of_the_route
+  .field
+    = f.label :driver
+    = select(:order, :driver_id, Driver.all.collect {|p| [ (p.fn + ' ' + p.sn + ' ' + p.ln), p.id ] }, { include_blank: true })
+  .field
+    = f.label :rate
+    = select(:order, :rate_id, Rate.all.collect {|p| [ p.name ,p.id ] }, { include_blank: true })
+  .actions
+    = f.submit 'Save'

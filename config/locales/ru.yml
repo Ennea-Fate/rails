@@ -1,0 +1,84 @@
+ru:
+  app:
+    name: Базовое приложение
+    company:
+      short_name: МПУ
+      department: Кафедра
+    users:
+      index: Список пользователей
+      new-button: Новый пользователь 
+      edit: Редактирование пользователя
+      new: Создание пользователя
+    roles:
+      index: Список возможных ролей пользователей
+      new-button: Новая роль
+      edit: Редактирование роли
+      new: Создание роли
+  helpers:
+    submit:
+      create: Сохранить
+      submit: Сохранить
+      update: Сохранить
+    sure: Действительно удалить?      
+  views:
+    pagination:
+      first: ⇤
+      last: ⇥
+      previous: ←
+      next: →
+      truncate: …
+  activerecord:
+    models:
+      user: Пользователь
+      auto: Автомобиль
+      driver: Водитель
+      order: Заказ
+      rate: Тариф
+    attributes:
+      user:
+        email: Пользовательское имя/электронная почта
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        reset_password_email_sent_at: Дата отправления письма для смены пароля
+        activation_state: Статус активации
+        activation_token_expires_at: Дата прекращения действия токена активации
+        last_login_at: Время последнего входа в систему
+        role_users: Роли
+      role:
+        name: Обозначение
+        info: Краткое название
+        full_info: Описание
+      auto:
+        model: Модель
+        class: Класс
+        number: Номер
+        color: Цвет
+        year: Год
+      driver:
+        fn: Фамилия
+        sn: Имя
+        ln: Отчество
+        birtdate: Дата рождения
+        TIN: ИНН
+        passport: Номер и серия пасспорта
+      order:
+        date: Дата
+        time: Время
+        from_adress: Адрес отбытия
+        to_adress: Адрес прибытия
+        passangers_count: Количество пассажиров
+        lenght_of_the_route: Длина маршрута в км.
+        driver: Водитель
+        rate: Тариф
+      rate:
+        name: Название
+        times_of_day: Время суток
+        how_far: Удаленность адреса прибытия (от центра Москвы)
+        PPK: Стоимость км. пути
+    errors:
+      models:
+        person:
+          attributes:
+            snils:
+              check_sum: имеет неправильную контрольную сумму
+          
