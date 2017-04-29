@@ -1,0 +1,13 @@
+I"ü(function() {
+  $(document).on('turbolinks:load', function() {
+    return $(function() {
+      return $('#timepicker').datetimepicker({
+        language: "ru",
+        autoclose: true,
+        toggleActive: true
+      });
+    });
+  });
+
+}).call(this);
+:ET

@@ -1,0 +1,29 @@
+%h1 Listing autos
+
+%table
+  %thead
+    %tr
+      %th Model
+      %th Class
+      %th Number
+      %th Color
+      %th Year
+      %th
+      %th
+      %th
+
+  %tbody
+    - @autos.each do |auto|
+      %tr
+        %td= auto.model
+        %td= auto.myclass
+        %td= auto.number
+        %td= auto.color
+        %td= auto.year
+        %td= link_to 'Show', auto
+        %td= link_to 'Edit', edit_auto_path(auto)
+        %td= link_to 'Destroy', auto, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Auto', new_auto_path

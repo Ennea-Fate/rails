@@ -1,0 +1,18 @@
+I"u(function() {
+  $(document).on('turbolinks:load', function() {
+    return $(function() {
+      return $('#datepicker').datepicker({
+        format: "yy",
+        startDate: "01.01.1977",
+        startView: 2,
+        minViewMode: 2,
+        maxViewMode: 3,
+        language: "ru",
+        autoclose: true,
+        toggleActive: true
+      });
+    });
+  });
+
+}).call(this);
+:ET
