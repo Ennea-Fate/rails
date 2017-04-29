@@ -1,0 +1,23 @@
+= form_for @user do |f|
+  = error_messages_for @user
+  .row
+    .col-md-8
+      .form-group
+        = f.label :email
+        = f.text_field :email, class: 'form-control'
+        = f.error_messages_for(:email)
+  - if @user.new_record?
+    .row
+      .col-md-4
+        .form-group
+          = f.label :password
+          = f.password_field :password, class: 'form-control'
+          = f.error_messages_for(:password)
+      .col-md-4
+        .form-group
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, class: 'form-control'
+          = f.error_messages_for(:password_confirmation)
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'
+

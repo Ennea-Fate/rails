@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Model:
+  = @auto.model
+%p
+  %b Class:
+  = @auto.myclass
+%p
+  %b Number:
+  = @auto.number
+%p
+  %b Color:
+  = @auto.color
+%p
+  %b Year:
+  = @auto.year
+
+= link_to 'Edit', edit_auto_path(@auto)
+\|
+= link_to 'Back', autos_path

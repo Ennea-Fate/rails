@@ -1,0 +1,37 @@
+=breadcrumb_tag do
+  %li.active
+    Роли
+  %li
+    Администрирование
+
+%h1= t('app.roles.index')
+
+%table.table.table-hover.table-striped.center
+  %caption
+    .pull-right
+      = link_to t('app.roles.new-button'), new_role_path, class: 'btn btn-primary'
+  %thead
+    %tr
+      %th= Role.human_attribute_name(:name)
+      %th= Role.human_attribute_name(:info)
+      %th= Role.human_attribute_name(:full_info)
+      %th.p50
+      %th.p50
+      %th.p50
+
+  %tbody
+    - @roles.each do |role|
+      %tr
+        %td= role.name
+        %td= role.info
+        %td= role.full_info
+        %td
+          = link_to role, class: 'btn btn-success' do
+            = fa_icon :eye
+        %td
+          = link_to edit_role_path(role), class: 'btn btn-info' do
+            = fa_icon :edit
+        %td
+          = link_to role, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
+            = fa_icon :times
+

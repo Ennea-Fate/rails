@@ -1,0 +1,13 @@
+- if @current_user.present?
+  =breadcrumb_tag do
+    %li.active
+      = t('app.users.new')
+    %li
+      = link_to 'Пользователи', users_path
+    %li
+      Администрирование
+    
+%h1= t('app.users.new')
+
+= render 'form'
+

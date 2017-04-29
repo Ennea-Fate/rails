@@ -1,0 +1,17 @@
+I"a(function() {
+  $(document).on('turbolinks:load', function() {
+    return $(function() {
+      return $('#datepicker_date').datepicker({
+        format: "yyyy-mm-dd",
+        startView: 1,
+        minViewMode: 1,
+        maxViewMode: 3,
+        language: "ru",
+        autoclose: true,
+        toggleActive: true
+      });
+    });
+  });
+
+}).call(this);
+:ET

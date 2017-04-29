@@ -1,0 +1,46 @@
+=breadcrumb_tag do
+  %li.active
+    Пользователи
+  %li
+    Администрирование
+
+%h1= t('app.users.index')
+
+%table.table.table-hover.table-striped.center
+  %caption
+    .pull-right
+      = link_to t('app.users.new-button'), new_user_path, class: 'btn btn-primary'
+  %thead
+    %tr
+      %th= User.human_attribute_name(:email)
+      %th= User.human_attribute_name(:reset_password_email_sent_at)
+      %th= User.human_attribute_name(:activation_state)
+      %th= User.human_attribute_name(:activation_token_expires_at)
+      %th= User.human_attribute_name(:last_login_at)
+      %th= User.human_attribute_name(:role_users)
+      %th.p50
+      %th.p50
+      %th.p50
+
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.email
+        %td= lnil(user.reset_password_email_sent_at)
+        %td= user.activation_state
+        %td= lnil(user.activation_token_expires_at)
+        %td= lnil(user.last_login_at)
+        %td
+          = user.role_users.map{ |ru| ru.role.name }.uniq.join(', ')
+        %td
+          = link_to user, class: 'btn btn-success' do
+            = fa_icon :eye
+        %td
+          = link_to edit_user_path(user), class: 'btn btn-info' do
+            = fa_icon :edit
+        %td
+          = link_to user, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
+            = fa_icon :times
+
+
+

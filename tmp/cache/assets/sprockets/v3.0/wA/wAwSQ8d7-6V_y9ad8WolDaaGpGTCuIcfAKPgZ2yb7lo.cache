@@ -1,0 +1,21 @@
+I"(function() {
+  $(function() {
+    $("#datepicker").datepicker({
+      changeYear: true,
+      yearRange: "-100:+0",
+      showButtonPanel: true,
+      dateFormat: 'yyyy',
+      hideIfNoPrevNext: true,
+      onClose: function(dateText, inst) {
+        var year;
+        year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+        $(this).datepicker("setDate", new Date(year, 1));
+      }
+    });
+    $(".date-picker-year").focus(function() {
+      $(".ui-datepicker-month").hide();
+    });
+  });
+
+}).call(this);
+:ET
