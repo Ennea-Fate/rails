@@ -1,18 +1,16 @@
--require 'time'
-
-%h1 Listing orders
+%h1= t('app.orders.index')
 
 %table
   %thead
     %tr
-      %th Date
-      %th Time
-      %th From adress
-      %th To adress
-      %th Passangers count
-      %th Lenght of the route
-      %th Driver
-      %th Rate
+      %th= Order.human_attribute_name(:date) + ':' 
+      %th= Order.human_attribute_name(:time) + ':' 
+      %th= Order.human_attribute_name(:from_adress) + ':' 
+      %th= Order.human_attribute_name(:to_adress) + ':' 
+      %th= Order.human_attribute_name(:passangers_count) + ':' 
+      %th= Order.human_attribute_name(:lenght_of_the_route) + ':' 
+      %th= Order.human_attribute_name(:driver) + ':' 
+      %th= Order.human_attribute_name(:rate) + ':' 
       %th
       %th
       %th
@@ -28,10 +26,16 @@
         %td= order.lenght_of_the_route
         %td= (order.driver.fn + ' ' + order.driver.sn + ' ' + order.driver.ln)
         %td= order.rate.name
-        %td= link_to 'Show', order
-        %td= link_to 'Edit', edit_order_path(order)
-        %td= link_to 'Destroy', order, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
+          = link_to order, class: 'btn btn-success' do
+            = fa_icon :eye
+        %td
+          = link_to edit_order_path(order), class: 'btn btn-info' do
+            = fa_icon :edit
+        %td 
+          = link_to order, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
+            = fa_icon :times
 
 %br
 
-= link_to 'New Order', new_order_path
+= link_to t('app.orders.new-button'), new_order_path

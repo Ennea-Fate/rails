@@ -1,24 +1,24 @@
 %p#notice= notice
 
 %p
-  %b Fn:
+  %b= Driver.human_attribute_name(:fn) + ':'
   = @driver.fn
 %p
-  %b Sn:
+  %b= Driver.human_attribute_name(:sn) + ':'
   = @driver.sn
 %p
-  %b Ln:
+  %b= Driver.human_attribute_name(:ln) + ':'
   = @driver.ln
 %p
-  %b Birthdate:
+  %b= Driver.human_attribute_name(:birthdate) + ':'
   = @driver.birthdate
 %p
-  %b Tin:
+  %b= Driver.human_attribute_name(:TIN) + ':'
   = @driver.TIN
 %p
-  %b Passport:
+  %b= Driver.human_attribute_name(:passport) + ':'
   = @driver.passport
 
-= link_to 'Edit', edit_driver_path(@driver)
+= link_to t('app.drivers.edit'), edit_driver_path(@driver)
 \|
-= link_to 'Back', drivers_path
+= link_to t('app.back'), drivers_path

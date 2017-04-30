@@ -1,18 +1,18 @@
 %p#notice= notice
 
 %p
-  %b Name:
+  %b= Rate.human_attribute_name(:name) + ':'
   = @rate.name
 %p
-  %b Times of day:
+  %b= Rate.human_attribute_name(:times_of_day) + ':'
   = @rate.times_of_day
 %p
-  %b How far:
+  %b= Rate.human_attribute_name(:how_far) + ':'
   = @rate.how_far
 %p
-  %b Ppk:
+  %b= Rate.human_attribute_name(:PPK) + ':'
   = @rate.PPK
 
-= link_to 'Edit', edit_rate_path(@rate)
+= link_to t('app.rates.edit'), edit_rate_path(@rate)
 \|
-= link_to 'Back', rates_path
+= link_to t('app.back'), rates_path

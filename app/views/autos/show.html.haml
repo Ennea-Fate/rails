@@ -1,21 +1,22 @@
 %p#notice= notice
 
 %p
-  %b Model:
+  %b= Auto.human_attribute_name(:model) + ':'
   = @auto.model
 %p
-  %b Class:
+  %b= Auto.human_attribute_name(:class) + ':'
   = @auto.myclass
 %p
-  %b Number:
+  %b= Auto.human_attribute_name(:number) + ':'
   = @auto.number
 %p
-  %b Color:
+  %b= Auto.human_attribute_name(:color) + ':'
   = @auto.color
 %p
-  %b Year:
+  %b= Auto.human_attribute_name(:year) + ':'
   = @auto.year
 
-= link_to 'Edit', edit_auto_path(@auto)
+
+= link_to t('app.autos.edit'), edit_auto_path(@auto)
 \|
-= link_to 'Back', autos_path
+= link_to t('app.back'), autos_path

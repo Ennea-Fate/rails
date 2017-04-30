@@ -31,4 +31,4 @@
     = f.label :rate
     = select(:order, :rate_id, Rate.all.collect {|p| [ p.name ,p.id ] }, { include_blank: true })
   .actions
-    = f.submit 'Save'
+    = f.submit t('app.save')

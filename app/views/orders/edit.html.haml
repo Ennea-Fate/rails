@@ -1,7 +1,7 @@
-%h1 Editing order
+%h1= t('app.orders.edit')
 
 = render 'form'
 
-= link_to 'Show', @order
+= link_to t('app.show'), @order
 \|
-= link_to 'Back', orders_path
+= link_to t('app.back'), orders_path

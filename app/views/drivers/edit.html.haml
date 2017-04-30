@@ -1,7 +1,7 @@
-%h1 Editing driver
+%h1= t('app.drivers.edit')
 
 = render 'form'
 
-= link_to 'Show', @driver
+= link_to t('app.show'), @driver
 \|
-= link_to 'Back', drivers_path
+= link_to t('app.back'), drivers_path

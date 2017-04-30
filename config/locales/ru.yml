@@ -1,5 +1,8 @@
 ru:
   app:
+    back: Назад
+    show: Просмотр	
+    save: Сохранить
     name: Базовое приложение
     company:
       short_name: МПУ
@@ -14,6 +17,26 @@ ru:
       new-button: Новая роль
       edit: Редактирование роли
       new: Создание роли
+    autos:
+      index: Список автомобилей
+      new-button: Новый автомобиль
+      edit: Редактировать автомобиль
+      new: Создать автомобиль
+    drivers:
+      index: Список водителей
+      new-button: Новый водитель
+      edit: Редактировать водителя
+      new: Создать водителя
+    orders:
+      index: Список заказов
+      new-button: Новый заказ
+      edit: Редактировать заказ
+      new: Создать заказ
+    rates:
+      index: Список тарифов
+      new-button: Новый тариф
+      edit: Редактировать тариф
+      new: Создать тариф
   helpers:
     submit:
       create: Сохранить
@@ -58,7 +81,7 @@ ru:
         fn: Фамилия
         sn: Имя
         ln: Отчество
-        birtdate: Дата рождения
+        birthdate: Дата рождения
         TIN: ИНН
         passport: Номер и серия пасспорта
       order:
@@ -67,7 +90,7 @@ ru:
         from_adress: Адрес отбытия
         to_adress: Адрес прибытия
         passangers_count: Количество пассажиров
-        lenght_of_the_route: Длина маршрута в км.
+        lenght_of_the_route: Длина маршрута (в км.)
         driver: Водитель
         rate: Тариф
       rate:

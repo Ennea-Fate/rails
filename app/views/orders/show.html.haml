@@ -1,30 +1,30 @@
 %p#notice= notice
 
 %p
-  %b Date:
+  %b= Order.human_attribute_name(:date) + ':'
   = @order.date
 %p
-  %b Time:
+  %b= Order.human_attribute_name(:time) + ':'
   = @order.time.strftime("%H:%M")
 %p
-  %b From adress:
+  %b= Order.human_attribute_name(:from_adress) + ':'
   = @order.from_adress
 %p
-  %b To adress:
+  %b= Order.human_attribute_name(:to_adress) + ':'
   = @order.to_adress
 %p
-  %b Passangers count:
+  %b= Order.human_attribute_name(:passangers_count) + ':'
   = @order.passangers_count
 %p
-  %b Lenght of the route:
+  %b= Order.human_attribute_name(:lenght_of_the_route) + ':'
   = @order.lenght_of_the_route
 %p
-  %b Driver:
+  %b= Order.human_attribute_name(:driver) + ':'
   = @order.driver.fn + ' ' + @order.driver.sn + ' ' + @order.driver.ln
 %p
-  %b Rate:
+  %b= Order.human_attribute_name(:rate) + ':'
   = @order.rate.name
 
-= link_to 'Edit', edit_order_path(@order)
+= link_to t('app.orders.edit'), edit_order_path(@order)
 \|
-= link_to 'Back', orders_path
+= link_to t('app.back'), orders_path

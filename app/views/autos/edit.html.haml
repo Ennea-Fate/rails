@@ -1,7 +1,7 @@
-%h1 Editing auto
+%h1= t('app.autos.edit')
 
 = render 'form'
 
-= link_to 'Show', @auto
+= link_to t('app.show'), @auto
 \|
-= link_to 'Back', autos_path
+= link_to t('app.back'), autos_path

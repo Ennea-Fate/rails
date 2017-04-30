@@ -1,13 +1,13 @@
-%h1 Listing autos
+%h1= t('app.autos.index')
 
 %table
   %thead
     %tr
-      %th Model
-      %th Class
-      %th Number
-      %th Color
-      %th Year
+      %th= Auto.human_attribute_name(:model)
+      %th= Auto.human_attribute_name(:class)
+      %th= Auto.human_attribute_name(:number)
+      %th= Auto.human_attribute_name(:color)
+      %th= Auto.human_attribute_name(:year)
       %th
       %th
       %th
@@ -20,10 +20,16 @@
         %td= auto.number
         %td= auto.color
         %td= auto.year
-        %td= link_to 'Show', auto
-        %td= link_to 'Edit', edit_auto_path(auto)
-        %td= link_to 'Destroy', auto, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
+          = link_to auto, class: 'btn btn-success' do
+            = fa_icon :eye
+        %td
+          = link_to edit_auto_path(auto), class: 'btn btn-info' do
+            = fa_icon :edit
+        %td
+          = link_to auto, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
+            = fa_icon :times
 
 %br
 
-= link_to 'New Auto', new_auto_path
+= link_to t('app.autos.new-button'), new_auto_path
