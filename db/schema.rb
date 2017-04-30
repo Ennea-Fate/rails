@@ -11,11 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170426230017) do
+=======
+ActiveRecord::Schema.define(version: 20170409205031) do
+>>>>>>> 56d4c6e737e219e71bab6e6b643b9c5610da69d4
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
   create_table "autos", force: :cascade do |t|
     t.string   "model",      limit: 64, null: false
     t.string   "myclass",               null: false
@@ -34,6 +39,8 @@ ActiveRecord::Schema.define(version: 20170426230017) do
   add_index "autos_drivers", ["auto_id"], name: "index_autos_drivers_on_auto_id", using: :btree
   add_index "autos_drivers", ["driver_id"], name: "index_autos_drivers_on_driver_id", using: :btree
 
+=======
+>>>>>>> 56d4c6e737e219e71bab6e6b643b9c5610da69d4
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -50,6 +57,7 @@ ActiveRecord::Schema.define(version: 20170426230017) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+<<<<<<< HEAD
   create_table "drivers", force: :cascade do |t|
     t.string   "fn",         null: false
     t.string   "sn",         null: false
@@ -86,6 +94,8 @@ ActiveRecord::Schema.define(version: 20170426230017) do
     t.datetime "updated_at",   null: false
   end
 
+=======
+>>>>>>> 56d4c6e737e219e71bab6e6b643b9c5610da69d4
   create_table "role_users", force: :cascade do |t|
     t.integer  "role_id",    null: false
     t.integer  "user_id",    null: false
@@ -149,8 +159,11 @@ ActiveRecord::Schema.define(version: 20170426230017) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+<<<<<<< HEAD
   add_foreign_key "orders", "drivers"
   add_foreign_key "orders", "rates"
+=======
+>>>>>>> 56d4c6e737e219e71bab6e6b643b9c5610da69d4
   add_foreign_key "role_users", "roles"
   add_foreign_key "role_users", "users"
 end
