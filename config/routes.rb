@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
   resources :orders
   resources :rates
   resources :drivers
   resources :autos
-=======
->>>>>>> 56d4c6e737e219e71bab6e6b643b9c5610da69d4
   resources :role_users
   resources :roles
   resources :password_resets

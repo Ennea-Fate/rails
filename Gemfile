@@ -4,11 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use postgresql as the database for Active Record
-<<<<<<< HEAD
 gem 'pg'
-=======
-gem 'pg', '~> 0.18.1'
->>>>>>> 56d4c6e737e219e71bab6e6b643b9c5610da69d4
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -20,11 +16,8 @@ gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-<<<<<<< HEAD
 gem 'jquery-ui-rails'
 gem 'bootstrap-datepicker-rails'
-=======
->>>>>>> 56d4c6e737e219e71bab6e6b643b9c5610da69d4
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
