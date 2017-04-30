@@ -1,19 +1,28 @@
+=breadcrumb_tag do
+  %li.active
+    Заказы
+  %li
+    Администрирование
+
 %h1= t('app.orders.index')
 
-%table
+%table.table.table-hover.table-striped.center
+  %caption
+    .pull-right
+      = link_to t('app.drivers.new-button'), new_driver_path, class: 'btn btn-primary'
   %thead
     %tr
-      %th= Order.human_attribute_name(:date) + ':' 
-      %th= Order.human_attribute_name(:time) + ':' 
-      %th= Order.human_attribute_name(:from_adress) + ':' 
-      %th= Order.human_attribute_name(:to_adress) + ':' 
-      %th= Order.human_attribute_name(:passangers_count) + ':' 
-      %th= Order.human_attribute_name(:lenght_of_the_route) + ':' 
-      %th= Order.human_attribute_name(:driver) + ':' 
-      %th= Order.human_attribute_name(:rate) + ':' 
-      %th
-      %th
-      %th
+      %th= Order.human_attribute_name(:date)
+      %th= Order.human_attribute_name(:time)
+      %th= Order.human_attribute_name(:from_adress)
+      %th= Order.human_attribute_name(:to_adress)
+      %th= Order.human_attribute_name(:passangers_count)
+      %th= Order.human_attribute_name(:lenght_of_the_route)
+      %th= Order.human_attribute_name(:driver)
+      %th= Order.human_attribute_name(:rate)
+      %th.p50
+      %th.p50
+      %th.p50
 
   %tbody
     - @orders.each do |order|

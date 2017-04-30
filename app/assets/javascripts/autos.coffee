@@ -9,6 +9,5 @@ $(document).on 'turbolinks:load', ->
       startView: 2,
       minViewMode: 2,
       maxViewMode: 3,
-      language: "ru",
-      autoclose: true,
+      autoclose: true
       toggleActive: true

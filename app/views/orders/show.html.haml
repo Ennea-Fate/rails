@@ -1,4 +1,10 @@
-%p#notice= notice
+=breadcrumb_tag do
+  %li.active
+    = 'Заказ №' + @order.id.to_s
+  %li
+    = link_to 'Заказы', orders_path
+  %li
+    Администрирование
 
 %p
   %b= Order.human_attribute_name(:date) + ':'

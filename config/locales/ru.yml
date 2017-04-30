@@ -12,31 +12,68 @@ ru:
       new-button: Новый пользователь 
       edit: Редактирование пользователя
       new: Создание пользователя
+      load_from_activation_token: Почта успешно подтверждена, аккаунт активирован!
+      create:
+        success: Пользователь успешно создан. Пожалуйста, проверьте свою почту для активации аккаунта!
+      update:
+        success: Пользователь успешно обновлен
+      destroy:
+        success: Пользователь успешно удален
     roles:
       index: Список возможных ролей пользователей
       new-button: Новая роль
       edit: Редактирование роли
       new: Создание роли
+      create:
+        success: Роль успешно создана
+      update:
+        success: Роль успешно обновлена
+      destroy:
+        success: Роль успешно удалена
     autos:
       index: Список автомобилей
       new-button: Новый автомобиль
       edit: Редактировать автомобиль
       new: Создать автомобиль
+      create:
+        success: Автомобиль успешно создан
+      update:
+        success: Автомобиль успешно обновлен
+      destroy:
+        success: Автомобиль успешно удален
     drivers:
       index: Список водителей
       new-button: Новый водитель
       edit: Редактировать водителя
       new: Создать водителя
+      create:
+        success: Водитель успешно создан
+      update:
+        success: Водитель успешно обновлен
+      destroy:
+        success: Водитель успешно удален
     orders:
       index: Список заказов
       new-button: Новый заказ
       edit: Редактировать заказ
       new: Создать заказ
+      create:
+        success: Заказ успешно создан
+      update:
+        success: Заказ успешно обновлен
+      destroy:
+        success: Заказ успешно удален
     rates:
       index: Список тарифов
       new-button: Новый тариф
       edit: Редактировать тариф
       new: Создать тариф
+      create:
+        success: Тариф успешно создан
+      update:
+        success: Тариф успешно обновлен
+      destroy:
+        success: Тариф успешно удален
   helpers:
     submit:
       create: Сохранить

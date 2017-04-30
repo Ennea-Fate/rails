@@ -28,7 +28,7 @@ class AutosController < ApplicationController
 
     respond_to do |format|
       if @auto.save
-        format.html { redirect_to @auto, notice: 'Auto was successfully created.' }
+        format.html { redirect_to @auto, notice: t('app.autos.create.success') }
         format.json { render :show, status: :created, location: @auto }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class AutosController < ApplicationController
   def update
     respond_to do |format|
       if @auto.update(auto_params)
-        format.html { redirect_to @auto, notice: 'Auto was successfully updated.' }
+        format.html { redirect_to @auto, notice: t('app.autos.update.success') }
         format.json { render :show, status: :ok, location: @auto }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class AutosController < ApplicationController
   def destroy
     @auto.destroy
     respond_to do |format|
-      format.html { redirect_to autos_url, notice: 'Auto was successfully destroyed.' }
+      format.html { redirect_to autos_url, notice: t('app.autos.destroy.success') }
       format.json { head :no_content }
     end
   end

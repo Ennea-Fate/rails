@@ -1,4 +1,10 @@
-%p#notice= notice
+=breadcrumb_tag do
+  %li.active
+    = @auto.model + ' ' + @auto.number
+  %li
+    = link_to 'Автомобили', autos_path
+  %li
+    Администрирование
 
 %p
   %b= Auto.human_attribute_name(:model) + ':'

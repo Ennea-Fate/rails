@@ -1,4 +1,10 @@
-%p#notice= notice
+=breadcrumb_tag do
+  %li.active
+    = @rate.name
+  %li
+    = link_to 'Тарифы', rates_path
+  %li
+    Администрирование
 
 %p
   %b= Rate.human_attribute_name(:name) + ':'

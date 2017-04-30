@@ -1,6 +1,15 @@
+=breadcrumb_tag do
+  %li.active
+    Автомобили
+  %li
+    Администрирование
+
 %h1= t('app.autos.index')
 
-%table
+%table.table.table-hover.table-striped.center
+  %caption
+    .pull-right
+      = link_to t('app.drivers.new-button'), new_driver_path, class: 'btn btn-primary'
   %thead
     %tr
       %th= Auto.human_attribute_name(:model)
@@ -8,9 +17,9 @@
       %th= Auto.human_attribute_name(:number)
       %th= Auto.human_attribute_name(:color)
       %th= Auto.human_attribute_name(:year)
-      %th
-      %th
-      %th
+      %th.p50
+      %th.p50
+      %th.p50
 
   %tbody
     - @autos.each do |auto|

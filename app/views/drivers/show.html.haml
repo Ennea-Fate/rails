@@ -1,4 +1,10 @@
-%p#notice= notice
+=breadcrumb_tag do
+  %li.active
+    = @driver.fn + ' ' + @driver.sn + ' ' + @driver.ln
+  %li
+    = link_to 'Водители', drivers_path
+  %li
+    Администрирование
 
 %p
   %b= Driver.human_attribute_name(:fn) + ':'

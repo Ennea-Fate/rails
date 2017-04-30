@@ -1,15 +1,24 @@
+=breadcrumb_tag do
+  %li.active
+    Тарифы
+  %li
+    Администрирование
+
 %h1= t('app.rates.index')
 
-%table
+%table.table.table-hover.table-striped.center
+  %caption
+    .pull-right
+      = link_to t('app.drivers.new-button'), new_driver_path, class: 'btn btn-primary'
   %thead
     %tr
-      %th= Rate.human_attribute_name(:name) + ':'
-      %th= Rate.human_attribute_name(:times_of_day) + ':'
-      %th= Rate.human_attribute_name(:how_far) + ':'
-      %th= Rate.human_attribute_name(:PPK) + ':'
-      %th
-      %th
-      %th
+      %th= Rate.human_attribute_name(:name)
+      %th= Rate.human_attribute_name(:times_of_day)
+      %th= Rate.human_attribute_name(:how_far)
+      %th= Rate.human_attribute_name(:PPK)
+      %th.p50
+      %th.p50
+      %th.p50
 
   %tbody
     - @rates.each do |rate|
