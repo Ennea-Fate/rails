@@ -4,3 +4,6 @@
 /tmp
 /public/system
 /nbproject
+/db/schema.rb
+/config/locales/ru.yml
+/app/controllers/users_controller.rb

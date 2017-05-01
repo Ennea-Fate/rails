@@ -4,34 +4,37 @@
   %li
     Администрирование
 
-%h1= t('app.roles.index')
+.page-header
+  %h1= t('headers.roles.index')
 
-%table.table.table-hover.table-striped.center
+%table.table.table-hover.table-striped
   %caption
-    .pull-right
-      = link_to t('app.roles.new-button'), new_role_path, class: 'btn btn-primary'
+    = link_to new_role_path, class: 'btn btn-success' do
+      = fa_icon :plus
+      = t('buttons.new.role')
   %thead
     %tr
       %th= Role.human_attribute_name(:name)
       %th= Role.human_attribute_name(:info)
       %th= Role.human_attribute_name(:full_info)
-      %th.p50
-      %th.p50
-      %th.p50
+      %th
 
   %tbody
     - @roles.each do |role|
       %tr
-        %td= role.name
-        %td= role.info
-        %td= role.full_info
-        %td
-          = link_to role, class: 'btn btn-success' do
+        %td.center= role.name
+        %td.center= role.info
+        %td.center= role.full_info
+        %td.right
+          = link_to role, class: 'btn btn-warning' do
             = fa_icon :eye
-        %td
+            = t('buttons.show')
           = link_to edit_role_path(role), class: 'btn btn-info' do
             = fa_icon :edit
-        %td
-          = link_to role, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
+            = t('buttons.edit')
+          = link_to role, :method => :delete, 
+          :data => { :confirm => t('buttons.confirm.role') }, 
+          class: 'btn btn-danger' do
             = fa_icon :times
+            = t('buttons.destroy')
 
