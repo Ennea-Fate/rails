@@ -1,50 +1,48 @@
 =breadcrumb_tag do
-  %li.active
-    Водители
   %li
     Администрирование
+  %li.active
+    =t('app.drivers.index')
 
-%h1= t('app.drivers.index')
+.page-header
+  %h1= t('headers.drivers.index')
 
-%table.table.table-hover.table-striped.center
+%table.table.table-hover.table-striped
   %caption
-    .pull-right
-      = link_to t('app.drivers.new-button'), new_driver_path, class: 'btn btn-primary'
+    = link_to new_driver_path, class: 'btn btn-success' do
+      = fa_icon :plus
+      = t('buttons.new.driver')  
   %thead
     %tr
+      %th
       %th= Driver.human_attribute_name(:fn)
       %th= Driver.human_attribute_name(:sn)
       %th= Driver.human_attribute_name(:ln)
       %th= Driver.human_attribute_name(:birthdate)
       %th= Driver.human_attribute_name(:TIN)
       %th= Driver.human_attribute_name(:passport)
-      %th.p50
-      %th.p50
-      %th.p50
-      %th.p50
-      %th.p50
+      %th= Driver.human_attribute_name(:auto)
+      %th
 
   %tbody
     - @drivers.each do |driver|
       %tr
-        %td= driver.fn
-        %td= driver.sn
-        %td= driver.ln
-        %td= driver.birthdate
-        %td= driver.TIN
-        %td= driver.passport
-        %td
+        %td.left 
           = link_to driver, class: 'btn btn-success' do
             = fa_icon :eye
-        %td
+        %td.center= driver.fn
+        %td.center= driver.sn
+        %td.center= driver.ln
+        %td.center= driver.birthdate
+        %td.center= driver.TIN
+        %td.center= driver.passport
+        %td.center= driver.auto.model + ' - ' + driver.auto.number
+        %td.right
           = link_to edit_driver_path(driver), class: 'btn btn-info' do
             = fa_icon :edit
-        %td
-          = link_to driver, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
+            = t('buttons.edit')
+          = link_to driver, :method => :delete, 
+          :data => { :confirm => t('buttons.confirm.driver') }, 
+          class: 'btn btn-danger' do
             = fa_icon :times
-        %td= "Add_auto"
-        %td= "Remove_auto"
-
-%br
-
-= link_to t('app.drivers.new-button'), new_driver_path
+            = t('buttons.destroy')

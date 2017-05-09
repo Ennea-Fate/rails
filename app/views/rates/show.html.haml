@@ -1,10 +1,10 @@
 =breadcrumb_tag do
-  %li.active
-    = @rate.name
-  %li
-    = link_to 'Тарифы', rates_path
   %li
     Администрирование
+  %li
+    = link_to t('app.rates.index'), rates_path
+  %li.active
+    = @rate.name
 
 %p
   %b= Rate.human_attribute_name(:name) + ':'
@@ -18,7 +18,3 @@
 %p
   %b= Rate.human_attribute_name(:PPK) + ':'
   = @rate.PPK
-
-= link_to t('app.rates.edit'), edit_rate_path(@rate)
-\|
-= link_to t('app.back'), rates_path

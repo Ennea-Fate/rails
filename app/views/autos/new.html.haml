@@ -1,5 +1,11 @@
+=breadcrumb_tag do
+  %li
+    Администрирование
+  %li
+    = link_to t('app.autos.index'), autos_path
+  %li.active
+    = t('app.autos.new')
+
 %h1= t('app.autos.new')
 
 = render 'form'
-
-= link_to t('app.back'), autos_path

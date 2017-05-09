@@ -1,10 +1,10 @@
 =breadcrumb_tag do
-  %li.active
-    = 'Заказ №' + @order.id.to_s
-  %li
-    = link_to 'Заказы', orders_path
   %li
     Администрирование
+  %li
+    = link_to t('app.orders.index'), orders_path
+  %li.active
+    = 'Заказ №' + @order.id.to_s
 
 %p
   %b= Order.human_attribute_name(:date) + ':'
@@ -31,6 +31,6 @@
   %b= Order.human_attribute_name(:rate) + ':'
   = @order.rate.name
 
-= link_to t('app.orders.edit'), edit_order_path(@order)
-\|
-= link_to t('app.back'), orders_path
+= link_to edit_order_path(@order), class: 'btn btn-info' do
+  = fa_icon :edit
+  = t('buttons.edit')

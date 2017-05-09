@@ -1,17 +1,20 @@
 =breadcrumb_tag do
-  %li.active
-    Заказы
   %li
     Администрирование
+  %li.active
+    =t('app.orders.index')
 
-%h1= t('app.orders.index')
+.page-header
+  %h1= t('headers.orders.index')
 
-%table.table.table-hover.table-striped.center
+%table.table.table-hover.table-striped
   %caption
-    .pull-right
-      = link_to t('app.drivers.new-button'), new_driver_path, class: 'btn btn-primary'
+    = link_to new_order_path, class: 'btn btn-success' do
+      = fa_icon :plus
+      = t('buttons.new.order')  
   %thead
     %tr
+      %th
       %th= Order.human_attribute_name(:date)
       %th= Order.human_attribute_name(:time)
       %th= Order.human_attribute_name(:from_adress)
@@ -20,31 +23,28 @@
       %th= Order.human_attribute_name(:lenght_of_the_route)
       %th= Order.human_attribute_name(:driver)
       %th= Order.human_attribute_name(:rate)
-      %th.p50
-      %th.p50
-      %th.p50
-
+      %th
   %tbody
     - @orders.each do |order|
       %tr
-        %td= order.date
-        %td= order.time.strftime("%H:%M")
-        %td= order.from_adress
-        %td= order.to_adress
-        %td= order.passangers_count
-        %td= order.lenght_of_the_route
-        %td= (order.driver.fn + ' ' + order.driver.sn + ' ' + order.driver.ln)
-        %td= order.rate.name
         %td
           = link_to order, class: 'btn btn-success' do
             = fa_icon :eye
-        %td
+        %td.center= order.date
+        %td.center= order.time.strftime("%H:%M")
+        %td.center= order.from_adress
+        %td.center= order.to_adress
+        %td.center= order.passangers_count
+        %td.center= order.lenght_of_the_route
+        %td.center= (order.driver.fn + ' ' + order.driver.sn + ' ' + order.driver.ln)
+        %td.center= order.rate.name
+        %td.right
           = link_to edit_order_path(order), class: 'btn btn-info' do
             = fa_icon :edit
-        %td 
-          = link_to order, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
+            = t('buttons.edit')
+          = link_to order, :method => :delete, 
+          :data => { :confirm => t('buttons.confirm.order') }, 
+          class: 'btn btn-danger' do
             = fa_icon :times
+            = t('buttons.destroy')
 
-%br
-
-= link_to t('app.orders.new-button'), new_order_path

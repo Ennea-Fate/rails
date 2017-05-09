@@ -1,7 +1,11 @@
+=breadcrumb_tag do
+  %li
+    Администрирование
+  %li
+    = link_to t('app.rates.index'), rates_path
+  %li.active
+    = link_to @rate.name, @rate
+
 %h1= t('app.rates.edit')
 
 = render 'form'
-
-= link_to t('app.show'), @rate
-\|
-= link_to t('app.back'), rates_path

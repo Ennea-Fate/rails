@@ -1,5 +1,10 @@
+=breadcrumb_tag do
+  %li
+    Администрирование
+  %li
+    =link_to t('app.orders.index'), orders_path
+  %li
+
 %h1= t('app.orders.new-button')
 
 = render 'form'
-
-= link_to t('app.back'), orders_path

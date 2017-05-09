@@ -1,41 +1,42 @@
 =breadcrumb_tag do
-  %li.active
-    Тарифы
   %li
     Администрирование
+  %li.active
+    =t('app.rates.index')
 
-%h1= t('app.rates.index')
+.page-header
+  %h1= t('headers.rates.index')
 
-%table.table.table-hover.table-striped.center
+%table.table.table-hover.table-striped
   %caption
-    .pull-right
-      = link_to t('app.drivers.new-button'), new_driver_path, class: 'btn btn-primary'
+    = link_to new_rate_path, class: 'btn btn-success' do
+      = fa_icon :plus
+      = t('buttons.new.rate')  
   %thead
     %tr
+      %th
       %th= Rate.human_attribute_name(:name)
       %th= Rate.human_attribute_name(:times_of_day)
       %th= Rate.human_attribute_name(:how_far)
       %th= Rate.human_attribute_name(:PPK)
-      %th.p50
-      %th.p50
-      %th.p50
+      %th
 
   %tbody
     - @rates.each do |rate|
       %tr
-        %td= rate.name
-        %td= rate.times_of_day
-        %td= rate.how_far
-        %td= rate.PPK
-        %td
-          = link_to rate, class: 'btn btn-success' do
-            = fa_icon :eye
-        %td
+      %td.left
+        = link_to rate, class: 'btn btn-success' do
+          = fa_icon :eye
+        %td.center= rate.name
+        %td.center= rate.times_of_day
+        %td.center= rate.how_far
+        %td.center= rate.PPK
+        %td.right
           = link_to edit_rate_path(rate), class: 'btn btn-info' do
             = fa_icon :edit
-        %td
-          = link_to rate, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
+            = t('buttons.edit')
+          = link_to rate, :method => :delete, 
+          :data => { :confirm => t('buttons.confirm.rate') }, 
+          class: 'btn btn-danger' do
             = fa_icon :times
-%br
-
-= link_to t('app.rates.new-button'), new_rate_path
+            = t('buttons.destroy')

@@ -13,6 +13,4 @@
  *= require theme
  *= require bootstrap-datetimepicker
  *= require_self
- *= require jquery-ui
- *= require bootstrap-datepicker3
  */

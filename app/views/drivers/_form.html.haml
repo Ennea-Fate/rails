@@ -17,12 +17,15 @@
     = f.text_field :ln
   .field
     = f.label :birthdate
-    = f.text_field :birthdate, id: 'datepicker_date'
+    = f.text_field :birthdate, id: 'datetimepicker'
   .field
     = f.label :TIN
     = f.number_field :TIN
   .field
     = f.label :passport
     = f.number_field :passport
-  .actions
-    = f.submit t('app.save')
+  .field
+    = f.label :auto
+    = select(:driver, :auto_id, Auto.all.collect {|p| [ (p.model + ' - ' + p.number), p.id ] }, { include_blank: true })
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'

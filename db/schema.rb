@@ -19,20 +19,12 @@ ActiveRecord::Schema.define(version: 20170501085108) do
   create_table "autos", force: :cascade do |t|
     t.string   "model",      limit: 64, null: false
     t.string   "myclass",               null: false
-    t.string   "number",     limit: 6,  null: false
+    t.string   "number",     limit: 9,  null: false
     t.string   "color",                 null: false
     t.string   "year",       limit: 4,  null: false
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
-
-  create_table "autos_drivers", id: false, force: :cascade do |t|
-    t.integer "auto_id",   null: false
-    t.integer "driver_id", null: false
-  end
-
-  add_index "autos_drivers", ["auto_id"], name: "index_autos_drivers_on_auto_id", using: :btree
-  add_index "autos_drivers", ["driver_id"], name: "index_autos_drivers_on_driver_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -57,9 +49,12 @@ ActiveRecord::Schema.define(version: 20170501085108) do
     t.date     "birthdate",  null: false
     t.integer  "TIN",        null: false
     t.integer  "passport",   null: false
+    t.integer  "auto_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "drivers", ["auto_id"], name: "index_drivers_on_auto_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.date     "date",                null: false
@@ -150,6 +145,7 @@ ActiveRecord::Schema.define(version: 20170501085108) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "drivers", "autos"
   add_foreign_key "orders", "drivers"
   add_foreign_key "orders", "rates"
   add_foreign_key "role_users", "roles"

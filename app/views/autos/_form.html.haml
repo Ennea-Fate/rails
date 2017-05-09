@@ -23,5 +23,5 @@
   .field
     = f.label :year
     = f.text_field :year, id: 'datepicker_year'
-  .actions
-    = f.submit t('app.save')
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'

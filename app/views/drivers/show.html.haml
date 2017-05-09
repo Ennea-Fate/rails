@@ -1,10 +1,10 @@
 =breadcrumb_tag do
-  %li.active
-    = @driver.fn + ' ' + @driver.sn + ' ' + @driver.ln
-  %li
-    = link_to 'Водители', drivers_path
   %li
     Администрирование
+  %li
+    = link_to t('app.drivers.index'), drivers_path
+  %li.active
+    = @driver.fn + ' ' + @driver.sn + ' ' + @driver.ln
 
 %p
   %b= Driver.human_attribute_name(:fn) + ':'
@@ -24,7 +24,10 @@
 %p
   %b= Driver.human_attribute_name(:passport) + ':'
   = @driver.passport
+%p
+  %b= Driver.human_attribute_name(:auto) + ':'
+  = @driver.auto.model + ' - ' + @driver.auto.number
 
-= link_to t('app.drivers.edit'), edit_driver_path(@driver)
-\|
-= link_to t('app.back'), drivers_path
+= link_to edit_driver_path(@driver), class: 'btn btn-info' do
+  = fa_icon :edit
+  = t('buttons.edit')

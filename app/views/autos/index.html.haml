@@ -1,44 +1,44 @@
 =breadcrumb_tag do
-  %li.active
-    Автомобили
   %li
     Администрирование
+  %li.active
+    =t('app.autos.index')
 
-%h1= t('app.autos.index')
+.page-header
+  %h1= t('headers.autos.index')
 
-%table.table.table-hover.table-striped.center
+%table.table.table-hover.table-striped
   %caption
-    .pull-right
-      = link_to t('app.drivers.new-button'), new_driver_path, class: 'btn btn-primary'
+    = link_to new_auto_path, class: 'btn btn-success' do
+      = fa_icon :plus
+      = t('buttons.new.auto')  
   %thead
     %tr
+      %th
       %th= Auto.human_attribute_name(:model)
       %th= Auto.human_attribute_name(:class)
       %th= Auto.human_attribute_name(:number)
       %th= Auto.human_attribute_name(:color)
       %th= Auto.human_attribute_name(:year)
-      %th.p50
-      %th.p50
-      %th.p50
+      %th
 
   %tbody
     - @autos.each do |auto|
       %tr
-        %td= auto.model
-        %td= auto.myclass
-        %td= auto.number
-        %td= auto.color
-        %td= auto.year
         %td
           = link_to auto, class: 'btn btn-success' do
             = fa_icon :eye
-        %td
+        %td.center= auto.model
+        %td.center= auto.myclass
+        %td.center= auto.number
+        %td.center= auto.color
+        %td.center= auto.year
+        %td.right
           = link_to edit_auto_path(auto), class: 'btn btn-info' do
             = fa_icon :edit
-        %td
-          = link_to auto, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
+            = t('buttons.edit')
+          = link_to auto, :method => :delete, 
+          :data => { :confirm => t('buttons.confirm.auto') }, 
+          class: 'btn btn-danger' do
             = fa_icon :times
-
-%br
-
-= link_to t('app.autos.new-button'), new_auto_path
+            = t('buttons.destroy')
