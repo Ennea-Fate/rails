@@ -64,6 +64,7 @@ ru:
     rates:
       index: Список тарифов
       new-button: Новый тариф
+      cncl-button: Отменить
       edit: Редактирование тарифа
       new: Создать тариф
       create:

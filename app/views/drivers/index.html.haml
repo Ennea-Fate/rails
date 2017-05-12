@@ -36,7 +36,10 @@
         %td.center= driver.birthdate
         %td.center= driver.TIN
         %td.center= driver.passport
-        %td.center= driver.auto.model + ' - ' + driver.auto.number
+        - if driver.auto_id != nil
+          %td.center= driver.auto.model + ' - ' + driver.auto.number
+        - else
+          %td.center null
         %td.right
           = link_to edit_driver_path(driver), class: 'btn btn-info' do
             = fa_icon :edit

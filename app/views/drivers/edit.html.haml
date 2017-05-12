@@ -1,7 +1,11 @@
-%h1= t('app.drivers.edit')
+=breadcrumb_tag do
+  %li
+    Администрирование
+  %li.active
+    =t('app.drivers.edit')
+
+.page-header
+  %h1= t('headers.drivers.edit')
+
 
 = render 'form'
-
-= link_to t('app.show'), @driver
-\|
-= link_to t('app.back'), drivers_path

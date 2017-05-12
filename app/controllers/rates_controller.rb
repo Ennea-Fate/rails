@@ -69,6 +69,6 @@ class RatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rate_params
-      params.require(:rate).permit(:name, :times_of_day, :how_far, :PPK)
+      params.require(:rate).permit(:name, :times_of_day, :how_far, :PPK, orders_attributes: [:date, :time, :from_adress, :to_adress, :passangers_count, :lenght_of_the_route, :driver_id, :rate_id])
     end
 end

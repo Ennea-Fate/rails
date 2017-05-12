@@ -1,5 +1,3 @@
-= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => "reload"
-= javascript_include_tag "application", "data-turbolinks-track" => "reload"
 = form_for @auto do |f|
   - if @auto.errors.any?
     #error_explanation
@@ -22,6 +20,6 @@
     = f.text_field :color
   .field
     = f.label :year
-    = f.text_field :year, id: 'datepicker_year'
+    = f.text_field :year, id: 'datetimepicker-yyyy'
   .form-actions
     = f.submit nil, class: 'btn btn-primary'

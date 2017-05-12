@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @order.build_rate
   end
 
   # GET /orders/1/edit
@@ -69,6 +70,8 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:date, :time, :from_adress, :to_adress, :passangers_count, :lenght_of_the_route, :driver_id, :rate_id)
+      params.require(:order).permit(:date, :time, :from_adress, :to_adress, :passangers_count, :lenght_of_the_route, :driver_id, :rate_id, 
+        rate_attributes: [:id, :_destroy, :name, :times_of_day, :how_far, :PPK]
+        )
     end
 end

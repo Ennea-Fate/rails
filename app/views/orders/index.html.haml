@@ -37,7 +37,10 @@
         %td.center= order.passangers_count
         %td.center= order.lenght_of_the_route
         %td.center= (order.driver.fn + ' ' + order.driver.sn + ' ' + order.driver.ln)
-        %td.center= order.rate.name
+        - if order.rate_id != nil
+          %td.center= order.rate.name
+        - else
+          %td.center Nil
         %td.right
           = link_to edit_order_path(order), class: 'btn btn-info' do
             = fa_icon :edit

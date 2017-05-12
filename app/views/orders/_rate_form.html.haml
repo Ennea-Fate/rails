@@ -1,0 +1,32 @@
+= f.fields_for(:rate, Rate.new, child_index: 'new_rate') do |r|
+  = r.hidden_field :id
+  .row.col-md-4#rate_field
+    .panel.panel-success
+      .panel-heading
+        = t('buttons.new.rate')
+      .panel-body
+        .from-group.row
+          .col-md-6
+            = r.label :name
+          .col-md-6
+            = r.text_field :name, class: 'form-control'
+        = r.error_messages_for(:name)
+        .from-group.row
+          .col-md-6
+            = r.label :times_of_day
+          .col-md-6
+            = r.text_field :times_of_day, class: 'form-control'
+        = r.error_messages_for(:times_of_day)
+        .from-group.row
+          .col-md-6
+            = r.label :how_far
+          .col-md-6
+            = r.text_field :how_far, class: 'form-control'
+        = r.error_messages_for(:how_far)
+        .from-group.row
+          .col-md-6
+            = r.label :PPK
+          .col-md-6
+            = r.text_field :PPK, class: 'form-control'
+        = r.error_messages_for(:PPK)
+        =link_to_delete_rate(f, f.object)

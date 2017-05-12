@@ -1,31 +1,100 @@
 = form_for @driver do |f|
-  - if @driver.errors.any?
+  - if @driver.errors.any? && @current_role_user.is_admin?
     #error_explanation
       %h2= "#{pluralize(@driver.errors.count, "error")} prohibited this driver from being saved:"
       %ul
         - @driver.errors.full_messages.each do |msg|
           %li= msg
+  .row
+    .col-md-6
+      .form-group
+        .row
+          .col-md-3
+            = f.label :fn
+          .col-md-3
+            = f.text_field :fn
+      = f.error_messages_for(:fn)
+      .form-group
+        .row
+          .col-md-3
+            = f.label :sn
+          .col-md-3
+            = f.text_field :sn
+      = f.error_messages_for(:sn)
+      .form-group
+        .row
+          .col-md-3
+            = f.label :ln
+          .col-md-3
+            = f.text_field :ln
+      = f.error_messages_for(:sn)
+      .form-group
+        .row
+          .col-md-3
+            = f.label :birthdate
+          .col-md-3
+            = f.text_field :birthdate, id: 'datetimepicker-dd-mm-yyyy'
+      = f.error_messages_for(:birthdate)
+    .col-md-6
+      .form-group
+        .row
+          .col-md-4
+            = f.label :TIN
+          .col-md-2
+            = f.text_field :TIN
+      = f.error_messages_for(:TIN)
+      .form-group
+        .row
+          .col-md-4
+            = f.label :passport
+          .col-md-2
+            = f.text_field :passport
+      = f.error_messages_for(:passport)
+      - if !(@driver.new_record?)
+        .form-group
+          .row
+            .col-md-4
+              = f.label :auto
+            .col-md-2
+              = select(:driver, :auto_id, Auto.all.collect {|p| [ (p.model + ' - ' + p.number), p.id ] }, { include_blank: true })
+        = f.error_messages_for(:auto_id)
+  = f.fields_for :auto do |a|
+    = a.hidden_field :id
+    .row.col-md-4
+      .panel.panel-success
+        .panel-heading
+          = t('buttons.new.auto')
+        .panel-body
+          .from-group.row
+            .col-md-6
+              = a.label :model
+            .col-md-6
+              = a.text_field :model, class: 'form-control'
+              = a.error_messages_for(:model)
+          .from-group.row
+            .col-md-6
+              = a.label :class
+            .col-md-6
+              = a.text_field :myclass, class: 'form-control'
+              = a.error_messages_for(:myclass)
+          .from-group.row
+            .col-md-6
+              = a.label :number
+            .col-md-6
+              = a.text_field :number, class: 'form-control'
+              = a.error_messages_for(:number)
+          .from-group.row
+            .col-md-6
+              = a.label :color
+            .col-md-6
+              = a.text_field :color, class: 'form-control'
+              = a.error_messages_for(:color)
+          .from-group.row
+            .col-md-6
+              = a.label :year
+            .col-md-6
+              = a.text_field :year, class: 'form-control', id: 'datetimepicker-yyyy'
+                = a.error_messages_for(:year)
 
-  .field
-    = f.label :fn
-    = f.text_field :fn
-  .field
-    = f.label :sn
-    = f.text_field :sn
-  .field
-    = f.label :ln
-    = f.text_field :ln
-  .field
-    = f.label :birthdate
-    = f.text_field :birthdate, id: 'datetimepicker'
-  .field
-    = f.label :TIN
-    = f.number_field :TIN
-  .field
-    = f.label :passport
-    = f.number_field :passport
-  .field
-    = f.label :auto
-    = select(:driver, :auto_id, Auto.all.collect {|p| [ (p.model + ' - ' + p.number), p.id ] }, { include_blank: true })
   .form-actions
     = f.submit nil, class: 'btn btn-primary'

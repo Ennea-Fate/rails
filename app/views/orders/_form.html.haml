@@ -5,30 +5,69 @@
       %ul
         - @order.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :date
-    = f.text_field :date, id: 'datepicker_date'
-  .field
-    = f.label :time
-    = f.time_select :time
-  .field
-    = f.label :from_adress
-    = f.text_area :from_adress
-  .field
-    = f.label :to_adress
-    = f.text_area :to_adress
-  .field
-    = f.label :passangers_count
-    = f.number_field :passangers_count
-  .field
-    = f.label :lenght_of_the_route
-    = f.text_field :lenght_of_the_route
-  .field
-    = f.label :driver
-    = select(:order, :driver_id, Driver.all.collect {|p| [ (p.fn + ' ' + p.sn + ' ' + p.ln), p.id ] }, { include_blank: true })
-  .field
-    = f.label :rate
-    = select(:order, :rate_id, Rate.all.collect {|p| [ p.name ,p.id ] }, { include_blank: true })
+          
+  .row
+    .col-md-6
+      .form-group
+        .row
+          .col-md-3
+            = f.label :date
+          .col-md-3
+            = f.text_field :date, id: 'datetimepicker'
+      = f.error_messages_for(:date)
+      .form-group
+        .row
+          .col-md-3
+            = f.label :time
+          .col-md-3
+            = f.text_field :time
+      = f.error_messages_for(:time)
+      .form-group
+        .row
+          .col-md-3
+            = f.label :from_adress
+          .col-md-3
+            = f.text_field :from_adress
+      = f.error_messages_for(:from_adress)
+      .form-group
+        .row
+          .col-md-3
+            = f.label :to_adress
+          .col-md-3
+            = f.text_field :to_adress
+      = f.error_messages_for(:to_adress)
+    .col-md-6
+      .form-group
+        .row
+          .col-md-4
+            = f.label :passangers_count
+          .col-md-2
+            = f.text_field :passangers_count
+      = f.error_messages_for(:passangers_count)
+      .form-group
+        .row
+          .col-md-4
+            = f.label :lenght_of_the_route
+          .col-md-2
+            = f.text_field :lenght_of_the_route
+      = f.error_messages_for(:lenght_of_the_route)
+      .form-group
+        .row
+          .col-md-4
+            = f.label :driver
+          .col-md-2
+            = select(:order, :driver_id, Driver.all.collect {|p| [ (p.fn + ' ' + p.sn + ' ' + p.ln), p.id ] }, { include_blank: true })
+      = f.error_messages_for(:driver)
+  .row
+    .col-md-12
+      =link_to_add_rate(f, f.object)
+      - if !@order.new_record?
+        .form-group
+          .row
+            .col-md-4
+              = f.label :rate
+            .col-md-2
+              = select(:order, :rate_id, Rate.all.collect {|p| [p.name, p.id ] }, { include_blank: true })
+        = f.error_messages_for(:auto_id)
   .form-actions
     = f.submit nil, class: 'btn btn-primary'

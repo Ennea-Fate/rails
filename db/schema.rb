@@ -43,15 +43,15 @@ ActiveRecord::Schema.define(version: 20170501085108) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "drivers", force: :cascade do |t|
-    t.string   "fn",         null: false
-    t.string   "sn",         null: false
-    t.string   "ln",         null: false
-    t.date     "birthdate",  null: false
-    t.integer  "TIN",        null: false
-    t.integer  "passport",   null: false
-    t.integer  "auto_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "fn",                    null: false
+    t.string   "sn",                    null: false
+    t.string   "ln",                    null: false
+    t.date     "birthdate",             null: false
+    t.string   "TIN",        limit: 10, null: false
+    t.string   "passport",   limit: 10, null: false
+    t.integer  "auto_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   add_index "drivers", ["auto_id"], name: "index_drivers_on_auto_id", using: :btree
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20170501085108) do
     t.integer  "passangers_count",    null: false
     t.string   "lenght_of_the_route", null: false
     t.integer  "driver_id",           null: false
-    t.integer  "rate_id",             null: false
+    t.integer  "rate_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end

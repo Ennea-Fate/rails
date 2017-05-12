@@ -25,9 +25,12 @@
   %b= Driver.human_attribute_name(:passport) + ':'
   = @driver.passport
 %p
-  %b= Driver.human_attribute_name(:auto) + ':'
-  = @driver.auto.model + ' - ' + @driver.auto.number
-
+  - if @driver.auto_id != nil
+    %b= Driver.human_attribute_name(:auto) + ':'
+    = @driver.auto.model + ' - ' + @driver.auto.number
+  - else
+    %b= Driver.human_attribute_name(:auto) + ':'
+    NULL
 = link_to edit_driver_path(@driver), class: 'btn btn-info' do
   = fa_icon :edit
   = t('buttons.edit')

@@ -1,7 +1,8 @@
 class Order < ActiveRecord::Base
   belongs_to :driver
-  belongs_to :rate
-	
+  belongs_to :rate, inverse_of: :orders
+	accepts_nested_attributes_for :rate, allow_destroy: true
+  
 	validates :date, presence: true
 	validates :time, presence: true
 	validates :from_adress, presence: true, length: { maximum: 512 }

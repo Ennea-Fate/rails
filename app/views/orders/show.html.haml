@@ -28,8 +28,12 @@
   %b= Order.human_attribute_name(:driver) + ':'
   = @order.driver.fn + ' ' + @order.driver.sn + ' ' + @order.driver.ln
 %p
-  %b= Order.human_attribute_name(:rate) + ':'
-  = @order.rate.name
+  - if @order.rate_id != nil
+    %b= Order.human_attribute_name(:rate) + ':'
+    = @order.rate.name
+  - else
+    %b= Order.human_attribute_name(:rate) + ':'
+    Nil
 
 = link_to edit_order_path(@order), class: 'btn btn-info' do
   = fa_icon :edit
