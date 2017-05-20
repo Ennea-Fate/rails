@@ -65,6 +65,7 @@ ru:
       index: Список тарифов
       new-button: Новый тариф
       cncl-button: Отменить
+      slct-button: Выбрать тариф
       edit: Редактирование тарифа
       new: Создать тариф
       create:
@@ -78,7 +79,7 @@ ru:
       create: Сохранить
       submit: Сохранить
       update: Сохранить
-    sure: Действительно удалить?      
+    sure: Действительно удалить?
   buttons:
     back: Назад
     save: Сохранить

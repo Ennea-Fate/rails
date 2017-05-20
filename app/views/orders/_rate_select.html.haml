@@ -1,0 +1,10 @@
+.panel.panel-success#rate_select
+  .panel-heading
+    = t('app.rates.slct-button')
+  .panel-body
+    .form-group.row
+      .col-md-4
+        = f.label :rate
+      .col-md-2
+        = select(:order, :rate_id, Rate.all.collect {|p| [p.name, p.id ] }, { include_blank: true })
+    = f.error_messages_for(:rate_id)

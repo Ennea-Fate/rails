@@ -1,17 +1,45 @@
 @add_new_ru = ->
   $('#add_rate_link').on 'click', ->
-    $(this).hide()
-    content = $(this).attr('data-content')
-    $(this).parent().parent().after(content)
+    if(!$(this).hasClass('active'))
+      $('#rate_select').remove()
+      content = $(this).attr('data-content')
+      $(this).toggleClass('active')
+      $("#add-rate-place").after(content)
+      if($('#select_rate_link').hasClass('active'))
+        $('#select_rate_link').toggleClass('active')
+        false
+      if($('#order_submit').hasClass('disabled'))
+        $('#order_submit').removeClass('disabled')
+        $('#order_submit').prop('disabled', false)
+        false
+      false
     false
   false
   
-  $('#delete_rate_link').on 'click', ->
-    ('#rate_field').replaceWith("<br>")
-    ('#add_rate_link').show()
+@select_new_ru = ->
+  $('#select_rate_link').on 'click', ->
+    if(!$(this).hasClass('active'))
+      $('#rate_field').remove()
+      content = $(this).attr('data-content')
+      $('#select-rate-place').after(content)
+      $(this).toggleClass('active')
+      if($('#add_rate_link').hasClass('active'))
+        $('#add_rate_link').toggleClass('active')
+        false
+      if($('#order_submit').hasClass('disabled'))
+        $('#order_submit').removeClass('disabled')
+        $('#order_submit').prop('disabled', false)
+        false
+      false
+    false
   false
-
+  
+@init = ->
+  $('#order_submit').prop('disabled', true)
+  
 ru_ready = ->
-  window.add_new_ru()
-$(document).ready ru_ready
+    window.add_new_ru()
+    window.select_new_ru()
+    window.init()
 $(document).on 'page:load', ru_ready
+$(document).ready ru_ready
