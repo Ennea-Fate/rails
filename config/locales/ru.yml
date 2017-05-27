@@ -30,8 +30,10 @@ ru:
     autos:
       index: Список автомобилей
       new-button: Новый автомобиль
+      slct-butto: Выбрать автомобиль
       edit: Редактирование автомобиля
       new: Создать автомобиль
+      remove: Удалить автомобиль
       create:
         success: Автомобиль успешно создан
       update:
@@ -180,7 +182,7 @@ ru:
       rate:
         name: Название
         times_of_day: Время суток
-        how_far: Удаленность адреса прибытия (от центра Москвы)
+        how_far: Удаленность
         PPK: Стоимость км. пути
       # nested_start
       role_user: &role_users

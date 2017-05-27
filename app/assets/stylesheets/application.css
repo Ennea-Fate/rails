@@ -13,4 +13,5 @@
  *= require theme
  *= require bootstrap-datetimepicker
  *= require_self
+ *= require bootstrap3-switch
  */

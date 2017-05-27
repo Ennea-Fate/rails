@@ -1,0 +1,46 @@
+.row
+  .panel.panel-success
+    .panel-heading
+      - if (new)
+        = t('buttons.new.auto')
+      - else
+        = a.object.model + ' ' + a.object.number
+        %span.toright
+          = check_box_tag('change', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'warning', :'label-text' => 'Сменить' } )
+          = check_box_tag('remove', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'danger', :'label-text' => 'удалить' } )
+          = a.hidden_field(:_destroy, {id: 'remove', value: false})
+    .panel-body#nested_attributes
+      .from-group.row
+        .col-md-2
+          = a.label :model
+        .col-md-6
+          = a.text_field :model, class: 'form-control'
+          = a.error_messages_for(:model)
+      .from-group.row
+        .col-md-2
+          = a.label :class
+        .col-md-6
+          = a.text_field :myclass, class: 'form-control'
+          = a.error_messages_for(:myclass)
+      .from-group.row
+        .col-md-2
+          = a.label :number
+        .col-md-6
+          = a.text_field :number, class: 'form-control'
+          = a.error_messages_for(:number)
+      .from-group.row
+        .col-md-2
+          = a.label :color
+        .col-md-6
+          = a.text_field :color, class: 'form-control'
+          = a.error_messages_for(:color)
+      .from-group.row
+        .col-md-2
+          = a.label :year
+        .col-md-6
+          .input-group.date.yearpicker
+            = a.text_field :year, class: 'form-control', value: a.object.year
+            %span.input-group-addon
+              %span.glyphicon.glyphicon-calendar
+      = a.error_messages_for(:year)
+      .hidden#remove_field_container{:data => {:content => a.hidden_field(:id)}}

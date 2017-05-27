@@ -1,5 +1,5 @@
 class Auto < ActiveRecord::Base
-	has_many :drivers, inverse_of: :auto
+	has_many :drivers, inverse_of: :auto, dependent: :nullify
   
 	validates :model, presence: true, length: { maximum: 64 }
 	validates :myclass, inclusion: { in: %w(бизнес эконом)}

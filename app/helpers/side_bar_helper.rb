@@ -22,6 +22,18 @@ module SideBarHelper
        :controller => :roles, :action => :index,
        :icon => 'align-center',
        :class => 'long'},
+      {:name => 'Добавление роли',
+       :controller => :roles, :action => :new,
+       :icon => 'align-center',
+       :class => 'long'},
+      {:name => 'Водители',
+       :controller => :drivers, :action => :index,
+       :class => 'long',
+       :icon => 'user'},
+      {:name => 'Заказы',
+       :controller => :orders, :action => :index,
+       :icon => 'list',
+       :class => 'long'},
     ]} 
     result << {
       :name => 'Заголовок ссылок',

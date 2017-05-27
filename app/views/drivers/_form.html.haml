@@ -9,92 +9,65 @@
     .col-md-6
       .form-group
         .row
-          .col-md-3
+          .col-md-4
             = f.label :fn
-          .col-md-3
-            = f.text_field :fn
+          .col-md-8
+            = f.text_field :fn, class: 'form-control'
       = f.error_messages_for(:fn)
       .form-group
         .row
-          .col-md-3
+          .col-md-4
             = f.label :sn
-          .col-md-3
-            = f.text_field :sn
+          .col-md-8
+            = f.text_field :sn, class: 'form-control'
       = f.error_messages_for(:sn)
       .form-group
         .row
-          .col-md-3
+          .col-md-4
             = f.label :ln
-          .col-md-3
-            = f.text_field :ln
+          .col-md-8
+            = f.text_field :ln, class: 'form-control'
       = f.error_messages_for(:sn)
       .form-group
         .row
-          .col-md-3
+          .col-md-4
             = f.label :birthdate
-          .col-md-3
-            = f.text_field :birthdate, id: 'datetimepicker-dd-mm-yyyy'
+          .col-md-8
+            .input-group.date.datepicker
+              = f.text_field :birthdate, value: lnil(f.object.birthdate), class: 'form-control'
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
       = f.error_messages_for(:birthdate)
-    .col-md-6
       .form-group
         .row
           .col-md-4
             = f.label :TIN
-          .col-md-2
-            = f.text_field :TIN
+          .col-md-8
+            = f.text_field :TIN, class: 'form-control'
       = f.error_messages_for(:TIN)
       .form-group
         .row
           .col-md-4
             = f.label :passport
-          .col-md-2
-            = f.text_field :passport
+          .col-md-8
+            = f.text_field :passport, class: 'form-control'
       = f.error_messages_for(:passport)
-      - if !(@driver.new_record?)
-        .form-group
-          .row
-            .col-md-4
-              = f.label :auto
-            .col-md-2
-              = select(:driver, :auto_id, Auto.all.collect {|p| [ (p.model + ' - ' + p.number), p.id ] }, { include_blank: true })
-        = f.error_messages_for(:auto_id)
-  = f.fields_for :auto do |a|
-    = a.hidden_field :id
-    .row.col-md-4
-      .panel.panel-success
-        .panel-heading
-          = t('buttons.new.auto')
-        .panel-body
-          .from-group.row
-            .col-md-6
-              = a.label :model
-            .col-md-6
-              = a.text_field :model, class: 'form-control'
-              = a.error_messages_for(:model)
-          .from-group.row
-            .col-md-6
-              = a.label :class
-            .col-md-6
-              = a.text_field :myclass, class: 'form-control'
-              = a.error_messages_for(:myclass)
-          .from-group.row
-            .col-md-6
-              = a.label :number
-            .col-md-6
-              = a.text_field :number, class: 'form-control'
-              = a.error_messages_for(:number)
-          .from-group.row
-            .col-md-6
-              = a.label :color
-            .col-md-6
-              = a.text_field :color, class: 'form-control'
-              = a.error_messages_for(:color)
-          .from-group.row
-            .col-md-6
-              = a.label :year
-            .col-md-6
-              = a.text_field :year, class: 'form-control', id: 'datetimepicker-yyyy'
-                = a.error_messages_for(:year)
-
-  .form-actions
-    = f.submit nil, class: 'btn btn-primary'
+    - if @current_role_user.present? and @current_role_user.is_admin?
+      .col-md-6
+        - if (!@driver.new_record?)
+          = f.fields_for(:auto) do |a|
+            = render('auto_form', a: a, new: false)
+  - if @current_role_user.present? and @current_role_user.is_admin?
+    .col-md-12.center
+      - new_or_select = check_box_tag('new_or_select', 'true', false, data: { :size => 'auto', :animate => 'true', :'on-color' => 'success', :'off-color' => 'warning', :'on-text' => 'Создать', :'off-text' => 'Выбрать', :'label-text' => 'Автомобиль', :'indeterminate' => true} )
+      - if (@driver.new_record? or !@driver.auto)
+        = new_or_select
+      - else
+        .hidden
+          = new_or_select
+      = f.fields_for(:auto, Auto.new) do |a|
+        #new_object_fields{:data => {:content => "#{render('auto_form', a: a, new: true)}"}}
+        #select_object_field{:data => {:content => "#{render('auto_select', f: f)}"}}
+  .col-md-6.col-md-offset-3
+    .form-actions
+      = f.submit nil, class: 'btn btn-primary'

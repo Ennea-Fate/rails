@@ -1,9 +1,15 @@
-= f.fields_for(:rate, Rate.new, child_index: 'new_rate', id: 'rate_field') do |r|
-  = r.hidden_field :id
-  .panel.panel-success#rate_field
+.row
+  .panel.panel-success
     .panel-heading
-      = t('buttons.new.rate')
-    .panel-body
+      - if (new)
+        = t('buttons.new.rate')
+      - else
+        = r.object.name
+        %span.toright
+          = check_box_tag('change', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'warning', :'label-text' => 'Сменить' } )
+          = check_box_tag('remove', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'danger', :'label-text' => 'удалить' } )
+          = r.hidden_field(:_destroy, {id: 'remove', value: false})
+    .panel-body#nested_attributes
       .from-group.row
         .col-md-6
           = r.label :name
@@ -14,13 +20,13 @@
         .col-md-6
           = r.label :times_of_day
         .col-md-6
-          = r.text_field :times_of_day, class: 'form-control'
+          = r.select(:times_of_day, [['ночь'], ['день']]  , {}, {:class => 'form-control'})
       = r.error_messages_for(:times_of_day, class: "bg-danger")
       .from-group.row
         .col-md-6
           = r.label :how_far
-        .col-md-6
-          = r.text_field :how_far, class: 'form-control'
+        .col-md-6 
+          = r.select(:how_far, [['В пределах МКАД'], ['За МКАД'], ['Подмосковье']] , {}, {:class => 'form-control'})
       = r.error_messages_for(:how_far, class: "bg-danger")
       .from-group.row
         .col-md-6
@@ -28,3 +34,4 @@
         .col-md-6
           = r.text_field :PPK, class: 'form-control'
       = r.error_messages_for(:PPK, class: "bg-danger")
+      .hidden#remove_field_container{:data => {:content => r.hidden_field(:id)}}

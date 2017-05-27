@@ -1,6 +1,6 @@
 @add_new_ru = ->
   $('#add_rate_link').on 'click', ->
-    if(!$(this).hasClass('active'))
+    if(!($(this).hasClass('active')))
       $('#rate_select').remove()
       content = $(this).attr('data-content')
       $(this).toggleClass('active')
@@ -18,7 +18,7 @@
   
 @select_new_ru = ->
   $('#select_rate_link').on 'click', ->
-    if(!$(this).hasClass('active'))
+    if(!($(this).hasClass('active')))
       $('#rate_field').remove()
       content = $(this).attr('data-content')
       $('#select-rate-place').after(content)
@@ -34,12 +34,10 @@
     false
   false
   
-@init = ->
-  $('#order_submit').prop('disabled', true)
   
 ru_ready = ->
-    window.add_new_ru()
     window.select_new_ru()
-    window.init()
+    window.add_new_ru()
+    window.remove_rate
 $(document).on 'page:load', ru_ready
 $(document).ready ru_ready
