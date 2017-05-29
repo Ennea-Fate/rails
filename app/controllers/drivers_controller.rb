@@ -1,5 +1,6 @@
 class DriversController < ApplicationController
   before_action :set_driver, only: [:show, :edit, :update, :destroy]
+  before_action -> {check_permissions('admin', 'operator')}, except: [:show, :index]
 
   # GET /drivers
   # GET /drivers.json
@@ -69,7 +70,7 @@ class DriversController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def driver_params
-      params.require(:driver).permit(:fn, :sn, :ln, :birthdate, :TIN, :passport, :auto_id, 
+      params.require(:driver).permit(:fn, :sn, :ln, :birthdate, :TIN, :passport, :auto_id, :remove_auto, :remove_auto_id,
       auto_attributes: [:id, :model, :myclass, :number, :color, :year, :_destroy]
         )
     end

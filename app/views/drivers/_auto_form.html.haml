@@ -8,7 +8,9 @@
         %span.toright
           = check_box_tag('change', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'warning', :'label-text' => 'Сменить' } )
           = check_box_tag('remove', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'danger', :'label-text' => 'удалить' } )
-          = a.hidden_field(:_destroy, {id: 'remove', value: false})
+          = f.hidden_field(:remove_auto, {id: 'remove', value: false})
+          = f.hidden_field(:remove_auto_id, {value: a.object.id})
+          = f.hidden_field(:auto_relation_count, {id: 'relation_count', value: a.object.drivers.size})
     .panel-body#nested_attributes
       .from-group.row
         .col-md-2
@@ -43,4 +45,4 @@
             %span.input-group-addon
               %span.glyphicon.glyphicon-calendar
       = a.error_messages_for(:year)
-      .hidden#remove_field_container{:data => {:content => a.hidden_field(:id)}}
+      = a.hidden_field(:id)

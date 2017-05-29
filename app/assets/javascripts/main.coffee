@@ -27,12 +27,11 @@ loader_f = ->
   $('[type = "checkbox"]#change').bootstrapSwitch()
   $('[type = "checkbox"]#change').on 'switchChange.bootstrapSwitch', (event, state) ->
     if(state == true)
-      $('[type = "checkbox"]#remove').bootstrapSwitch('state', false, false)
       html = $('.panel-body#nested_attributes').html()
       $('.panel-body#nested_attributes').data('content', html)
       $('.panel-body#nested_attributes').empty()
       $('[type = "checkbox"]#new_or_select').parent().parent().parent().toggleClass('hidden')
-      $('[type = "checkbox"]#new_or_select').bootstrapSwitch('state', false, false)
+      $('[type = "checkbox"]#new_or_select').bootstrapSwitch('indeterminate', false, false)
     else
       content = $('.panel-body#nested_attributes').data('content')
       $('.panel-body#nested_attributes').html(content)
@@ -44,13 +43,17 @@ loader_f = ->
   $('[type = "checkbox"]#remove').bootstrapSwitch()
   $('[type = "checkbox"]#remove').on 'switchChange.bootstrapSwitch', (event, state) ->
     if(state == true)
-      $('[type = "checkbox"]#change').bootstrapSwitch('state', false, false)
+      $('[type = "checkbox"]#change').bootstrapSwitch('state', true, false)
       $('[type = "hidden"]#remove').val(true)
-      content = $('.hidden#remove_field_container').data('content')
-      $('.hidden#remove_field_container').append(content)
+      if($('#relation_count').val() > 1)
+        $('[type = "submit"][name = "commit"]').prop( "disabled", true );
+        $('.fa-question').parent().toggleClass('hidden')
+        $('[data-toggle="tooltip"]').tooltip()
     else
       $('[type = "hidden"]#remove').val(false)
-      $('.hidden#remove_field_container').empty()
+      if($('#relation_count').val() > 1)
+        $('[type = "submit"][name = "commit"]').prop( "disabled", false );
+        $('.fa-question').parent().toggleClass('hidden')
 
   
   

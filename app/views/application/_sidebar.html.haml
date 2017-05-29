@@ -6,7 +6,7 @@
           = link_to('#', class: 'with-subitems') do
             = fa_icon(item[:icon], class: 'menu-icon')
             = item[:name]
-            %span.pull-right.carret
+            %span.pull-left.carret
               = fa_icon('angle-down', class: 'menu-icon')              
           %ul.subitems{class: (item[:children].any?{ |subitem| is_open?(subitem[:controller], subitem[:action]) } ? :subopen : :subclose)}
             - item[:children].each do |subitem|

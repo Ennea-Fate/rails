@@ -1,10 +1,10 @@
 =breadcrumb_tag do
   %li
-    Администрирование
+    = link_to t('app.administration'), root_path
   %li
     =link_to t('app.orders.index'), orders_path
   %li.active
     =t('app.orders.once') + ' №' + @order.id.to_s
-%h1= t('app.orders.edit')
-
+%br
+%br
 = render 'form'

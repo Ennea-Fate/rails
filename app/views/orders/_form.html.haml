@@ -67,7 +67,7 @@
       .col-md-6
         - if (!@order.new_record?)
           = f.fields_for(:rate) do |r|
-            = render('rate_form', r: r, new: false)
+            = render('rate_form', r: r, f: f, new: false)
   - if @current_role_user.present? and @current_role_user.is_admin?
     .col-md-12.center
       - new_or_select = check_box_tag('new_or_select', 'true', false, data: { :size => 'auto', :animate => 'true', :'on-color' => 'success', :'off-color' => 'warning', :'on-text' => 'Создать', :'off-text' => 'Выбрать', :'label-text' => 'Тариф', :'indeterminate' => true} )
@@ -81,4 +81,7 @@
         #select_object_field{:data => {:content => "#{render('rate_select', f: f)}"}}
   .col-md-6.col-md-offset-3
     .form-actions
-      = f.submit nil, class: 'btn btn-primary'
+      .btn-group
+        = f.submit nil, class: 'btn btn-primary'
+        %a{value: '', class: 'btn btn-primary  hidden',title: 'Невозможно удалить тариф используемый в других заказах!', data: {toggle: 'tooltip', animation: true, placement: 'bottom'}}
+          %i{class: 'fa fa-question'}

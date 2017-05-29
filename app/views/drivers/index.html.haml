@@ -6,46 +6,46 @@
 
 .page-header
   %h1= t('headers.drivers.index')
-
-%table.table.table-hover.table-striped
-  %caption
-    = link_to new_driver_path, class: 'btn btn-success' do
-      = fa_icon :plus
-      = t('buttons.new.driver')  
-  %thead
-    %tr
-      %th
-      %th= Driver.human_attribute_name(:fn)
-      %th= Driver.human_attribute_name(:sn)
-      %th= Driver.human_attribute_name(:ln)
-      %th= Driver.human_attribute_name(:birthdate)
-      %th= Driver.human_attribute_name(:TIN)
-      %th= Driver.human_attribute_name(:passport)
-      %th= Driver.human_attribute_name(:auto)
-      %th
-
-  %tbody
-    - @drivers.each do |driver|
+  
+.table-responsive
+  %table.table.table-hover.table-striped
+    %caption
+      = link_to new_driver_path, class: 'btn btn-success' do
+        = fa_icon :plus
+        = t('buttons.new.driver')  
+    %thead
       %tr
-        %td.left 
-          = link_to driver, class: 'btn btn-success' do
-            = fa_icon :eye
-        %td.center= driver.fn
-        %td.center= driver.sn
-        %td.center= driver.ln
-        %td.center= driver.birthdate
-        %td.center= driver.TIN
-        %td.center= driver.passport
-        - if driver.auto_id != nil
-          %td.center= driver.auto.model + ' - ' + driver.auto.number
-        - else
-          %td.center null
-        %td.right
-          = link_to edit_driver_path(driver), class: 'btn btn-info' do
-            = fa_icon :edit
-            = t('buttons.edit')
-          = link_to driver, :method => :delete, 
-          :data => { :confirm => t('buttons.confirm.driver') }, 
-          class: 'btn btn-danger' do
-            = fa_icon :times
-            = t('buttons.destroy')
+        %th
+        %th= Driver.human_attribute_name(:fn)
+        %th= Driver.human_attribute_name(:sn)
+        %th= Driver.human_attribute_name(:ln)
+        %th= Driver.human_attribute_name(:birthdate)
+        %th= Driver.human_attribute_name(:TIN)
+        %th= Driver.human_attribute_name(:passport)
+        %th= Driver.human_attribute_name(:auto)
+        %th
+    %tbody
+      - @drivers.each do |driver|
+        %tr
+          %td.left 
+            = link_to driver, class: 'btn btn-success' do
+              = fa_icon :eye
+          %td.center= driver.fn
+          %td.center= driver.sn
+          %td.center= driver.ln
+          %td.center= driver.birthdate
+          %td.center= driver.TIN
+          %td.center= driver.passport
+          - if driver.auto_id != nil
+            %td.center= driver.auto.model + ' - ' + driver.auto.number
+          - else
+            %td.center null
+          %td.right
+            = link_to edit_driver_path(driver), class: 'btn btn-info' do
+              = fa_icon :edit
+              = t('buttons.edit')
+            = link_to driver, :method => :delete, 
+            :data => { :confirm => t('buttons.confirm.driver') }, 
+            class: 'btn btn-danger' do
+              = fa_icon :times
+              = t('buttons.destroy')

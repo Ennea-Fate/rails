@@ -1,53 +1,54 @@
 =breadcrumb_tag do
   %li
-    Администрирование
+    = link_to t('app.administration'), root_path
   %li.active
-    =t('app.orders.index')
+    = t('app.orders.index')
 
 .page-header
   %h1= t('headers.orders.index')
 
-%table.table.table-hover.table-striped
-  %caption
-    = link_to new_order_path, class: 'btn btn-success' do
-      = fa_icon :plus
-      = t('buttons.new.order')  
-  %thead
-    %tr
-      %th
-      %th= Order.human_attribute_name(:date)
-      %th= Order.human_attribute_name(:time)
-      %th= Order.human_attribute_name(:from_adress)
-      %th= Order.human_attribute_name(:to_adress)
-      %th= Order.human_attribute_name(:passangers_count)
-      %th= Order.human_attribute_name(:lenght_of_the_route)
-      %th= Order.human_attribute_name(:driver)
-      %th= Order.human_attribute_name(:rate)
-      %th
-  %tbody
-    - @orders.each do |order|
+.table-responsive
+  %table.table.table-hover.table-striped
+    %caption
+      = link_to new_order_path, class: 'btn btn-success' do
+        = fa_icon :plus
+        = t('buttons.new.order')  
+    %thead
       %tr
-        %td
-          = link_to order, class: 'btn btn-success' do
-            = fa_icon :eye
-        %td.center= order.date
-        %td.center= order.time.strftime("%H:%M")
-        %td.center= order.from_adress
-        %td.center= order.to_adress
-        %td.center= order.passangers_count
-        %td.center= order.lenght_of_the_route
-        %td.center= (order.driver.fn + ' ' + order.driver.sn + ' ' + order.driver.ln)
-        - if order.rate_id != nil
-          %td.center= order.rate.name
-        - else
-          %td.center Nil
-        %td.right
-          = link_to edit_order_path(order), class: 'btn btn-info' do
-            = fa_icon :edit
-            = t('buttons.edit')
-          = link_to order, :method => :delete, 
-          :data => { :confirm => t('buttons.confirm.order') }, 
-          class: 'btn btn-danger' do
-            = fa_icon :times
-            = t('buttons.destroy')
+        %th
+        %th= Order.human_attribute_name(:date)
+        %th= Order.human_attribute_name(:time)
+        %th= Order.human_attribute_name(:from_adress)
+        %th= Order.human_attribute_name(:to_adress)
+        %th= Order.human_attribute_name(:passangers_count)
+        %th= Order.human_attribute_name(:lenght_of_the_route)
+        %th= Order.human_attribute_name(:driver)
+        %th= Order.human_attribute_name(:rate)
+        %th
+    %tbody
+      - @orders.each do |order|
+        %tr
+          %td
+            = link_to order, class: 'btn btn-success' do
+              = fa_icon :eye
+          %td.center= order.date
+          %td.center= order.time.strftime("%H:%M")
+          %td.center= order.from_adress
+          %td.center= order.to_adress
+          %td.center= order.passangers_count
+          %td.center= order.lenght_of_the_route
+          %td.center= (order.driver.fn + ' ' + order.driver.sn + ' ' + order.driver.ln)
+          - if order.rate_id != nil
+            %td.center= order.rate.name
+          - else
+            %td.center Nil
+          %td.right
+            = link_to edit_order_path(order), class: 'btn btn-info' do
+              = fa_icon :edit
+              = t('buttons.edit')
+            = link_to order, :method => :delete, 
+            :data => { :confirm => t('buttons.confirm.order') }, 
+            class: 'btn btn-danger' do
+              = fa_icon :times
+              = t('buttons.destroy')
 

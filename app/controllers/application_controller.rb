@@ -41,6 +41,15 @@ class ApplicationController < ActionController::Base
   def check_ctr_auth()
     return @current_role_user.try(:is_admin?)
   end
+  
+  def check_permissions(*roles)
+    unless roles.find{|x| @current_role_user.try("is_#{x}?") }
+     redirect_to(ip_path(
+      bad_action_name: action_name,
+      bad_controller_name: controller_name,
+      bad_user_role: @current_role_user.try(:id)))
+    end
+  end
 
   def not_authenticated
     redirect_to login_path, danger: "Сначала войдите в систему!"

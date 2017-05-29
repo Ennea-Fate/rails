@@ -1,3 +1,10 @@
-%h1= t('app.drivers.new')
-
+=breadcrumb_tag do
+  %li
+    = link_to t('app.administration'), root_path
+  %li
+    = link_to t('app.drivers.index'), drivers_path
+  %li.active
+    = 'Новый водитель'
+%br
+%br
 = render 'form'

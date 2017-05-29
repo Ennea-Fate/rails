@@ -8,7 +8,9 @@
         %span.toright
           = check_box_tag('change', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'warning', :'label-text' => 'Сменить' } )
           = check_box_tag('remove', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'danger', :'label-text' => 'удалить' } )
-          = r.hidden_field(:_destroy, {id: 'remove', value: false})
+          = f.hidden_field(:remove_rate, {id: 'remove', value: false})
+          = f.hidden_field(:remove_rate_id, {value: r.object.id})
+          = f.hidden_field(:rate_relation_count, {id: 'relation_count', value: r.object.orders.size})
     .panel-body#nested_attributes
       .from-group.row
         .col-md-6
@@ -34,4 +36,4 @@
         .col-md-6
           = r.text_field :PPK, class: 'form-control'
       = r.error_messages_for(:PPK, class: "bg-danger")
-      .hidden#remove_field_container{:data => {:content => r.hidden_field(:id)}}
+      = r.hidden_field(:id)

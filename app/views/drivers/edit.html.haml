@@ -1,11 +1,10 @@
 =breadcrumb_tag do
   %li
-    Администрирование
+    = link_to t('app.administration'), root_path
+  %li
+    = link_to t('app.drivers.index'), drivers_path
   %li.active
-    =t('app.drivers.edit')
-
-.page-header
-  %h1= t('headers.drivers.edit')
-
-
+    = @driver.fn + ' ' + @driver.sn + ' ' + @driver.ln
+%br
+%br
 = render 'form'

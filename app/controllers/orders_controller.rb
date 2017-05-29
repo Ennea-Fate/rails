@@ -1,8 +1,31 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action -> {check_permissions('admin', 'operator')}, except: [:show, :index]
 
   # GET /orders
   # GET /orders.json
+  
+  def search
+    if params.has_key?('search')
+      @orders = Order.search(params['search'])
+    else
+      @orders = []
+    end
+    params['search'] ||= {}
+    @s_rate_name = params.has_key?('search') ? params[:search][:rate_name] : ""
+    @s_rate_time_of_day = params.has_key?('search') ? params[:search][:times_of_day] : ""
+    @s_rate_how_far = params.has_key?('search') ? params[:search][:rate_how_far] : ""
+    @s_auto_model = params.has_key?('search') ? params[:search][:auto_model] : ""
+    @s_auto_class = params.has_key?('search') ? params[:search][:auto_class] : ""
+    @s_auto_color = params.has_key?('search') ? params[:search][:auto_color] : ""
+    @s_date_from = params.has_key?('search') ? params[:search][:date_from] : ""
+    @s_date_to = params.has_key?('search') ? params[:search][:date_to] : ""
+    @s_time_from = params.has_key?('search') ? params[:search][:time_from] : ""
+    @s_time_to = params.has_key?('search') ? params[:search][:time_to] : ""
+    @s_adress_from = params.has_key?('search') ? params[:search][:adress_from] : ""
+    @s_adress_to = params.has_key?('search') ? params[:search][:adress_to] : ""
+  end
+  
   def index
     @orders = Order.all
   end
@@ -54,9 +77,9 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy
-    @order.destroy
+    message = @order.destroy ? t('app.orders.destroy.success') : "#{@order.errors[:base].first.to_s}"
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: t('app.orders.destroy.success') }
+      format.html { redirect_to orders_url, notice: message }
       format.json { head :no_content }
     end
   end
@@ -69,8 +92,8 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:date, :time, :from_adress, :to_adress, :passangers_count, :lenght_of_the_route, :driver_id, :rate_id, 
-        rate_attributes: [:id, :_destroy, :name, :times_of_day, :how_far, :PPK]
+      params.require(:order).permit(:date, :time, :from_adress, :to_adress, :passangers_count, :lenght_of_the_route, :driver_id, :rate_id,:remove_rate, :remove_rate_id,
+        rate_attributes: [:id, :name, :times_of_day, :how_far, :PPK]
         )
     end
 end

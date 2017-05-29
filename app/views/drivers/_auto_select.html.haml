@@ -3,7 +3,11 @@
     = t('app.autos.slct-button')
   .panel-body
     .form-group.row
+      - if (f.object.auto != nil)
+        - auto_id = f.object.auto.id
+      - else
+        - auto_id = 0
       .col-md-4
         = f.label :auto
       .col-md-8
-        = select(:driver, :auto_id, Auto.all.collect {|p| [ (p.model + ' - ' + p.number), p.id ] }, { include_blank: true }, class: 'form-control')
+        = select(:driver, :auto_id, Auto.all.where("id != ?", auto_id).collect {|p| [ (p.model + ' - ' + p.number), p.id ] }, { include_blank: true }, class: 'form-control')

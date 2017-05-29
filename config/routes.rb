@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :orders
+  resources :orders do
+    collection do
+      get :search
+    end
+  end
   resources :rates
   resources :drivers
   resources :autos

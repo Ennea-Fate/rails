@@ -56,7 +56,7 @@
       .col-md-6
         - if (!@driver.new_record?)
           = f.fields_for(:auto) do |a|
-            = render('auto_form', a: a, new: false)
+            = render('auto_form', a: a, f: f, new: false)
   - if @current_role_user.present? and @current_role_user.is_admin?
     .col-md-12.center
       - new_or_select = check_box_tag('new_or_select', 'true', false, data: { :size => 'auto', :animate => 'true', :'on-color' => 'success', :'off-color' => 'warning', :'on-text' => 'Создать', :'off-text' => 'Выбрать', :'label-text' => 'Автомобиль', :'indeterminate' => true} )
@@ -70,4 +70,7 @@
         #select_object_field{:data => {:content => "#{render('auto_select', f: f)}"}}
   .col-md-6.col-md-offset-3
     .form-actions
-      = f.submit nil, class: 'btn btn-primary'
+      .btn-group
+        = f.submit nil, class: 'btn btn-primary'
+        %a{value: '', class: 'btn btn-primary  hidden',title: 'Невозможно удалить автомобиль принадлежащий другим водителям!', data: {toggle: 'tooltip', animation: true, placement: 'bottom'}}
+          %i{class: 'fa fa-question'}

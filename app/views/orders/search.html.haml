@@ -1,0 +1,253 @@
+=breadcrumb_tag do
+  %li
+    = link_to t('app.administration'), root_path
+  %li
+    = link_to t('app.orders.index'), orders_path
+  %li
+    = t('headers.orders.search')
+
+%br
+%br
+
+= form_tag search_orders_path(), method: :get do
+  .row
+    .col-md-6
+      .panel.panel-default
+        .panel-heading
+          = t('search.byorder')
+        .panel-body
+          .form-group
+            .row
+              .col-md-4
+                = Order.human_attribute_name(:time)
+              .col-md-8
+                .input-group.date.datetimepicker
+                  = text_field_tag 'search[time_from]', params['search']['time_from'], class: 'form-control', placeholder: t('search.from')
+                  %span.input-group-addon
+                    %span.glyphicon.glyphicon-calendar
+                .input-group.date.datetimepicker
+                  = text_field_tag 'search[time_to]', params['search']['time_to'], class: 'form-control', placeholder: t('search.to')
+                  %span.input-group-addon
+                    %span.glyphicon.glyphicon-calendar
+          .form-group
+            .row
+              .col-md-4
+                = Order.human_attribute_name(:passangers_count)
+              .col-md-8
+                = text_field_tag 'search[passangers_count]', params['search']['passangers_count'], class: 'form-control'
+          .form-group
+            .row
+              .col-md-4
+                = Order.human_attribute_name(:lenght_of_the_route)
+              .col-md-8
+                = text_field_tag('search[lenght_of_the_route]', params['search']['lenght_of_the_route'], class: 'form-control', data: {:'slider-min' => '1', :'slider-max' => '150', :'slider-step' => '1', :'slider-value' => '[0, 150]'})
+          .form-group
+            .row
+              .col-md-4
+                = Order.human_attribute_name(:from_adress)
+              .col-md-8
+                = text_field_tag 'search[from_adress]', params['search']['from_adress'], class: 'form-control'
+          .form-group
+            .row
+              .col-md-4
+                = Order.human_attribute_name(:to_adress)
+              .col-md-8
+                = text_field_tag 'search[to_adress]', params['search']['to_adress'], class: 'form-control'
+    .col-md-6
+      .panel.panel-default
+        .panel-heading
+          = t('search.byrate')
+        .panel-body
+          .form-group
+            .row
+              .col-md-4
+                = Rate.human_attribute_name(:name)
+              .col-md-8
+                = select_tag 'search[rate_name]', options_for_select((Rate.all.map{|x| [x.name, x.name]}.sort), @s_rate_name), {include_blank: true, class: 'form-control'}
+          .form-group
+            .row
+              .col-md-4
+                = Rate.human_attribute_name(:times_of_day)
+              .col-md-8
+                = select_tag 'search[times_of_day]', options_for_select((Rate.all.map{|x| [x.times_of_day, x.times_of_day]}.uniq.sort), @s_rate_times_of_day), {include_blank: true, class: 'form-control'}
+          .form-group
+            .row
+              .col-md-4
+                = Rate.human_attribute_name(:how_far)
+              .col-md-8
+                = select_tag 'search[how_far]', options_for_select((Rate.all.map{|x| [x.how_far, x.how_far]}.uniq.sort), @s_rate_how_far),{include_blank: true, class: 'form-control'}
+          .form-group
+            .row
+              .col-md-4
+                = Rate.human_attribute_name(:PPK)
+              .col-md-8
+                = text_field_tag('search[PPK]', params['search']['PPK'], class: 'form-control', data: {'slider-min' => '75', 'slider-max' => '750', 'slider-step' => '5', 'slider-value' => '[75, 750]'})
+  .row
+    .col-md-6
+      .panel.panel-default
+        .panel-heading
+          = t('search.byauto')
+        .panel-body
+          .form-group
+            .row
+              .col-md-4
+                = Auto.human_attribute_name(:model)
+              .col-md-8
+                = select_tag 'search[auto_model]', options_for_select((Auto.all.map{|x| [x.model, x.model]}.uniq.sort), @s_auto_model),{include_blank: true, class: 'form-control'}
+          .form-group
+            .row
+              .col-md-4
+                = Auto.human_attribute_name(:class)
+              .col-md-8
+                = select_tag 'search[auto_class]', options_for_select((Auto.all.map{|x| [x.myclass, x.myclass]}.uniq.sort), @s_auto_class),{include_blank: true, class: 'form-control'}
+          .form-group
+            .row
+              .col-md-4
+                = Auto.human_attribute_name(:number)
+              .col-md-8
+                = text_field_tag 'search[auto_number]', params['search']['state_number'], {include_blank: true, class: 'form-control'}
+          .form-group
+            .row
+              .col-md-4
+                = Auto.human_attribute_name(:color)
+              .col-md-8
+                = select_tag 'search[auto_color]', options_for_select((Auto.all.map{|x| [x.color, x.color]}.uniq.sort), @s_auto_color), {include_blank: true, class: 'form-control'}
+          .form-group
+            .row
+              .col-md-4
+                = Auto.human_attribute_name(:year)
+              .col-md-8
+                = text_field_tag 'search[year]', params['search']['year'], {include_blank: true, class: 'form-control'}
+    .col-md-6
+      .panel.panel-default
+        .panel-heading
+          = t('search.bydriver')
+        .panel-body
+          .form-group
+            .row
+              .col-md-4
+                = Driver.human_attribute_name(:fn)
+              .col-md-8
+                = text_field_tag 'search[driver_fn]', params['search']['driver_fn'], class: 'form-control'
+          .form-group
+            .row
+              .col-md-4
+                = Driver.human_attribute_name(:sn)
+              .col-md-8
+                = text_field_tag 'search[driver_sn]', params['search']['driver_sn'], class: 'form-control'
+          .form-group
+            .row
+              .col-md-4
+                = Driver.human_attribute_name(:ln)
+              .col-md-8
+                = text_field_tag 'search[driver_ln]', params['search']['driver_ln'], class: 'form-control'
+          .form-group
+            .row
+              .col-md-4
+                = Driver.human_attribute_name(:birthdate)
+              .col-md-8
+                .input-group.date.datepicker
+                  = text_field_tag 'search[driver_birthdate]', params['search']['driver_birthdate'], class: 'form-control'
+                  %span.input-group-addon
+                    %span.glyphicon.glyphicon-calendar
+          .form-group
+            .row
+              .col-md-4
+                = Driver.human_attribute_name(:TIN)
+              .col-md-8
+                = text_field_tag 'search[driver_TIN]', params['search']['driver_TIN'], class: 'form-control'
+          .form-group
+            .row
+              .col-md-4
+                = Driver.human_attribute_name(:passport)
+              .col-md-8
+                = text_field_tag 'search[driver_passport]', params['search']['driver_passport'], class: 'form-control'
+
+  .actions
+    = submit_tag t('buttons.search'), class: 'btn btn-primary', id: 'search-button'
+
+
+
+- if @orders.size > 0
+  .page-header
+    %h1= t('search.found') + ": " + @orders.size.to_s
+  - @orders.each do |order|
+    .panel.panel-success
+      .panel-heading
+        = t('app.orders.once') + ' № ' + order.id.to_s
+      .panel-body
+        .row
+          .col-md-4
+            .left
+              = Order.human_attribute_name(:time)
+          .col-md-8
+            .left
+              = order.time.strftime("%H:%M")
+        .row
+          .col-md-4
+            .left
+              = Driver.human_attribute_name(:auto)
+              %br
+              = Auto.human_attribute_name(:model)
+              %br
+              = Auto.human_attribute_name(:number)
+              %br
+              = Auto.human_attribute_name(:class)
+          .col-md-8
+            .left
+              %br
+              = "  #{order.driver.auto.model}"
+              %br
+              = "  #{order.driver.auto.number}"
+              %br
+              = "  #{order.driver.auto.myclass}"
+        .row
+          .col-md-4
+            .left
+              = Order.human_attribute_name(:from_adress)
+          .col-md-8
+            .left
+              = order.from_adress
+        .row
+          .col-md-4
+            .left
+              = Order.human_attribute_name(:to_adress)
+          .col-md-8
+            .left
+              = order.to_adress
+        .row
+          .col-md-4
+            .left
+              = Order.human_attribute_name(:rate)
+              %br
+              = Rate.human_attribute_name(:name)
+              %br
+              = Rate.human_attribute_name(:times_of_day)
+              %br
+              = Rate.human_attribute_name(:how_far)
+              %br
+              = Rate.human_attribute_name(:PPK)
+          .col-md-8
+            .left
+              %br
+              = "  #{order.rate.name}"
+              %br
+              = "  #{order.rate.times_of_day}"
+              %br
+              = "  #{order.rate.how_far}"
+              %br
+              = "  #{order.rate.PPK} руб./км}"
+        .row
+          .col-md-4
+            .left
+              = Order.human_attribute_name(:passangers_count)
+          .col-md-8
+            .left
+              = order.passangers_count
+        .row
+          .col-md-4
+            .left
+              = Order.human_attribute_name(:lenght_of_the_route)
+          .col-md-8
+            .left
+              = order.lenght_of_the_route       

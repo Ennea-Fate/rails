@@ -1,11 +1,12 @@
 =breadcrumb_tag do
   %li
-    Администрирование
+    = link_to t('app.administration'), root_path
   %li
     = link_to t('app.orders.index'), orders_path
   %li.active
     = 'Заказ №' + @order.id.to_s
-
+%br
+%br
 %p
   %b= Order.human_attribute_name(:date) + ':'
   = @order.date
