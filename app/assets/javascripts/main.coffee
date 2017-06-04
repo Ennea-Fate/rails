@@ -14,36 +14,42 @@ loader_f = ->
   $("[type = 'checkbox']#new_or_select").bootstrapSwitch()
   $("[type = 'checkbox']#new_or_select").on ('switchChange.bootstrapSwitch'), (event, state) ->
     if(state == true)
-      $('div#select_object_field').empty()
-      content = $('div#new_object_fields').attr('data-content')
-      $('div#new_object_fields').append(content)
+      $('.panel-body#nested_attributes').empty()
+      content = $('.panel-body#nested_attributes').data('content-form')
+      $('.panel-body#nested_attributes').append(content)
+      $('[name = "driver[auto_attributes][id]"]').remove()
+      $('[name = "order[rate_attributes][id]"]').remove()
       window.datepicker_activation()
     else
-      $('div#new_object_fields').empty()
-      content = $('div#select_object_field').attr('data-content')
-      $('div#select_object_field').append(content)
+      if(!!!$('.panel-body#nested_attributes').data('content-form'))
+        html = $('.panel-body#nested_attributes').html()
+        $('.panel-body#nested_attributes').data('content-form', html)
+      $('.panel-body#nested_attributes').empty()
+      content = $('.panel-body#nested_attributes').data('content-select')
+      $('.panel-body#nested_attributes').append(content)
       
 @switch_change = ->
   $('[type = "checkbox"]#change').bootstrapSwitch()
   $('[type = "checkbox"]#change').on 'switchChange.bootstrapSwitch', (event, state) ->
     if(state == true)
       html = $('.panel-body#nested_attributes').html()
-      $('.panel-body#nested_attributes').data('content', html)
+      $('.panel-body#nested_attributes').data('content-form', html)
       $('.panel-body#nested_attributes').empty()
-      $('[type = "checkbox"]#new_or_select').parent().parent().parent().toggleClass('hidden')
-      $('[type = "checkbox"]#new_or_select').bootstrapSwitch('indeterminate', false, false)
+      $('[type = "checkbox"]#new_or_select').bootstrapSwitch("toggleDisabled", false, false)
+      $('[type = "checkbox"]#new_or_select').bootstrapSwitch('toggleState', false, false)
+      $('#link_to_auto_new').click()
+      $('#link_to_rate_new').click()
     else
-      content = $('.panel-body#nested_attributes').data('content')
+      content = $('.panel-body#nested_attributes').data('content-form')
       $('.panel-body#nested_attributes').html(content)
-      $('[type = "checkbox"]#new_or_select').parent().parent().parent().toggleClass('hidden')
-      $('div#new_object_fields').empty()
-      $('div#select_object_field').empty()
+      $('[type = "checkbox"]#new_or_select').bootstrapSwitch("toggleDisabled", false, false)
       
 @switch_remove = ->
   $('[type = "checkbox"]#remove').bootstrapSwitch()
   $('[type = "checkbox"]#remove').on 'switchChange.bootstrapSwitch', (event, state) ->
     if(state == true)
       $('[type = "checkbox"]#change').bootstrapSwitch('state', true, false)
+      $('[type = "checkbox"]#change').bootstrapSwitch("toggleDisabled", true, false)
       $('[type = "hidden"]#remove').val(true)
       if($('#relation_count').val() > 1)
         $('[type = "submit"][name = "commit"]').prop( "disabled", true );
@@ -51,6 +57,7 @@ loader_f = ->
         $('[data-toggle="tooltip"]').tooltip()
     else
       $('[type = "hidden"]#remove').val(false)
+      $('[type = "checkbox"]#change').bootstrapSwitch("toggleDisabled", false, false)
       if($('#relation_count').val() > 1)
         $('[type = "submit"][name = "commit"]').prop( "disabled", false );
         $('.fa-question').parent().toggleClass('hidden')

@@ -1,48 +1,63 @@
-.row
-  .panel.panel-success
-    .panel-heading
-      - if (new)
-        = t('buttons.new.auto')
-      - else
-        = a.object.model + ' ' + a.object.number
-        %span.toright
-          = check_box_tag('change', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'warning', :'label-text' => 'Сменить' } )
-          = check_box_tag('remove', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'danger', :'label-text' => 'удалить' } )
-          = f.hidden_field(:remove_auto, {id: 'remove', value: false})
-          = f.hidden_field(:remove_auto_id, {value: a.object.id})
-          = f.hidden_field(:auto_relation_count, {id: 'relation_count', value: a.object.drivers.size})
-    .panel-body#nested_attributes
-      .from-group.row
-        .col-md-2
-          = a.label :model
-        .col-md-6
-          = a.text_field :model, class: 'form-control'
-          = a.error_messages_for(:model)
-      .from-group.row
-        .col-md-2
-          = a.label :class
-        .col-md-6
-          = a.text_field :myclass, class: 'form-control'
-          = a.error_messages_for(:myclass)
-      .from-group.row
-        .col-md-2
-          = a.label :number
-        .col-md-6
-          = a.text_field :number, class: 'form-control'
-          = a.error_messages_for(:number)
-      .from-group.row
-        .col-md-2
-          = a.label :color
-        .col-md-6
-          = a.text_field :color, class: 'form-control'
-          = a.error_messages_for(:color)
-      .from-group.row
-        .col-md-2
-          = a.label :year
-        .col-md-6
-          .input-group.date.yearpicker
-            = a.text_field :year, class: 'form-control', value: a.object.year
-            %span.input-group-addon
-              %span.glyphicon.glyphicon-calendar
-      = a.error_messages_for(:year)
-      = a.hidden_field(:id)
+- if (@driver.auto == nil)
+  - @driver.auto = Auto.new
+  
+- if (@driver.new_record?)
+  - disabled = false
+- else
+  - disabled = true
+  .hidden
+    = link_to('#', auto_new_driver_path(f.object), remote: true, id: 'link_to_auto_new')
+  
+- new_or_select = new_or_select = check_box_tag('new_or_select', 'true', true, disabled: disabled, data: { :size => 'mini', :animate => 'true', :'on-color' => 'success', :'off-color' => 'warning', :'on-text' => 'Создать', :'off-text' => 'Выбрать', :'label-text' => 'Автомобиль'} )
+= f.fields_for(:auto) do |a|
+  .row
+    .panel.panel-success
+      .panel-heading
+        - if (@driver.auto == nil or @driver.new_record?)
+          = t('buttons.new.auto')
+          %span.toright
+            = new_or_select
+        - else
+          = f.object.auto.model + ' ' + f.object.auto.number
+          %br
+            = check_box_tag('change', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'warning', :'label-text' => 'Сменить' } )
+            = new_or_select
+            = check_box_tag('remove', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'danger', :'label-text' => 'удалить' } )
+            = f.hidden_field(:remove_auto, {id: 'remove', value: false})
+            = f.hidden_field(:remove_auto_id, {value: a.object.id})
+            = f.hidden_field(:auto_relation_count, {id: 'relation_count', value: a.object.drivers.size})
+      .panel-body#nested_attributes{:data => {:'content-select' => "#{render('auto_select', f: f)}"}}
+        .from-group.row
+          .col-md-2
+            = a.label :model
+          .col-md-6
+            = a.text_field :model, class: 'form-control'
+            = a.error_messages_for(:model)
+        .from-group.row
+          .col-md-2
+            = a.label :class
+          .col-md-6
+            = a.select(:myclass, [['эконом'], ['бизнес']] , {}, {:class => 'form-control'})
+            = a.error_messages_for(:myclass)
+        .from-group.row
+          .col-md-2
+            = a.label :number
+          .col-md-6
+            = a.text_field :number, class: 'form-control'
+            = a.error_messages_for(:number)
+        .from-group.row
+          .col-md-2
+            = a.label :color
+          .col-md-6
+            = a.text_field :color, class: 'form-control'
+            = a.error_messages_for(:color)
+        .from-group.row
+          .col-md-2
+            = a.label :year
+          .col-md-6
+            .input-group.date.yearpicker
+              = a.text_field :year, class: 'form-control', value: a.object.year
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+        = a.error_messages_for(:year)
+        = a.hidden_field(:id)

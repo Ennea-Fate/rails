@@ -1,9 +1,9 @@
-.panel.panel-success#rate_select
+.panel.panel-success
   .panel-heading
     = t('app.rates.slct-button')
   .panel-body
     .form-group.row
-      - if (f.object.rate != nil)
+      - if (@order.rate.id != nil)
         - rate_id = f.object.rate.id
       - else
         - rate_id = 0

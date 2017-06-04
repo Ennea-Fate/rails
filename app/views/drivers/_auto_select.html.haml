@@ -1,9 +1,9 @@
-.panel.panel-success#rate_select
+.panel.panel-success
   .panel-heading
     = t('app.autos.slct-button')
   .panel-body
     .form-group.row
-      - if (f.object.auto != nil)
+      - if (@driver.auto.id != nil)
         - auto_id = f.object.auto.id
       - else
         - auto_id = 0
@@ -11,3 +11,4 @@
         = f.label :auto
       .col-md-8
         = select(:driver, :auto_id, Auto.all.where("id != ?", auto_id).collect {|p| [ (p.model + ' - ' + p.number), p.id ] }, { include_blank: true }, class: 'form-control')
+    = f.error_messages_for(:auto_id)

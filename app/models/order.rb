@@ -33,13 +33,12 @@ class Order < ActiveRecord::Base
   
   def self.search(params)
     result = Order.includes(:rate, driver: [:auto]).references(:rate, driver: [:auto])
-    
     # BYORDER
     if params['time_from'].present?
-      result = result.where.not(time: Time.at(0)...Time.parse(params['time_from']))
+      result = result.where.not(time: Time.at(0)...Time.parse(("2000-01-01" + " " + params['time_from'] + " " + "UTC")))
     end
     if params['time_to'].present?
-      result = result.where(time: Time.at(0)..Time.parse(params['time_to']))
+      result = result.where(time: Time.at(0)..Time.parse(("2000-01-01" + " " + params['time_to'] + " " + "UTC")))
     end
     if params['from_address'].present?
       result = result.where(departure_address: params['from_address'])
@@ -53,6 +52,12 @@ class Order < ActiveRecord::Base
     if params['length_of_the_route'].present?
       tmp = params['length_of_route'].split(/\D+/)
       result = result.where(length_of_the_route: (tmp[0].to_f..tmp[0].to_f))
+    end
+    if params['date_from'].present?
+      result = result.where.not(date: Date.new(0)...Date.parse(params['date_from']))
+    end
+    if params['date_to'].present?
+      result = result.where(date: Date.new(0)..Date.parse(params['date_to']))
     end
 
     # BYRATE

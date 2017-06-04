@@ -12,7 +12,16 @@ class DriversController < ApplicationController
   # GET /drivers/1.json
   def show
   end
-
+  
+  def auto_new
+    respond_to do |format|
+      format.js do
+        @driver = Driver.find(params[:id])
+        @driver.auto = Auto.new
+      end
+    end
+  end
+  
   # GET /drivers/new
   def new
     @driver = Driver.new

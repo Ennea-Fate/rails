@@ -1,39 +1,54 @@
-.row
-  .panel.panel-success
-    .panel-heading
-      - if (new)
-        = t('buttons.new.rate')
-      - else
-        = r.object.name
-        %span.toright
-          = check_box_tag('change', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'warning', :'label-text' => 'Сменить' } )
-          = check_box_tag('remove', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'danger', :'label-text' => 'удалить' } )
-          = f.hidden_field(:remove_rate, {id: 'remove', value: false})
-          = f.hidden_field(:remove_rate_id, {value: r.object.id})
-          = f.hidden_field(:rate_relation_count, {id: 'relation_count', value: r.object.orders.size})
-    .panel-body#nested_attributes
-      .from-group.row
-        .col-md-6
-          = r.label :name
-        .col-md-6
-          = r.text_field :name, class: 'form-control'
-      = r.error_messages_for(:name, class: "bg-danger")
-      .from-group.row
-        .col-md-6
-          = r.label :times_of_day
-        .col-md-6
-          = r.select(:times_of_day, [['ночь'], ['день']]  , {}, {:class => 'form-control'})
-      = r.error_messages_for(:times_of_day, class: "bg-danger")
-      .from-group.row
-        .col-md-6
-          = r.label :how_far
-        .col-md-6 
-          = r.select(:how_far, [['В пределах МКАД'], ['За МКАД'], ['Подмосковье']] , {}, {:class => 'form-control'})
-      = r.error_messages_for(:how_far, class: "bg-danger")
-      .from-group.row
-        .col-md-6
-          = r.label :PPK
-        .col-md-6
-          = r.text_field :PPK, class: 'form-control'
-      = r.error_messages_for(:PPK, class: "bg-danger")
-      = r.hidden_field(:id)
+- if (@order.rate == nil)
+  - @order.rate = Rate.new
+  
+- if (@order.new_record?)
+  - disabled = false
+- else
+  - disabled = true
+  .hidden
+    = link_to('#', rate_new_order_path(f.object), remote: true, id: 'link_to_rate_new')
+
+- new_or_select = new_or_select = check_box_tag('new_or_select', 'true', true, disabled: disabled, data: { :size => 'mini', :animate => 'true', :'on-color' => 'success', :'off-color' => 'warning', :'on-text' => 'Создать', :'off-text' => 'Выбрать', :'label-text' => 'Тариф'} )
+= f.fields_for(:rate) do |r|
+  .row
+    .panel.panel-success
+      .panel-heading
+        - if (@order.rate == nil or @order.new_record?)
+          = t('buttons.new.rate')
+          %span.toright
+            = new_or_select
+        - else
+          = r.object.name
+          %br
+            = check_box_tag('change', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'warning', :'label-text' => 'Сменить' } )
+            = new_or_select
+            = check_box_tag('remove', 'false', false, data: { :size => 'mini', :animate => 'true', :'on-color' => 'default', :'off-color' => 'danger', :'label-text' => 'удалить' } )
+            = f.hidden_field(:remove_rate, {id: 'remove', value: false})
+            = f.hidden_field(:remove_rate_id, {value: r.object.id})
+            = f.hidden_field(:rate_relation_count, {id: 'relation_count', value: r.object.orders.size})
+      .panel-body#nested_attributes{:data => {:'content-select' => "#{render('rate_select', f: f)}"}}
+        .from-group.row
+          .col-md-6
+            = r.label :name
+          .col-md-6
+            = r.text_field :name, class: 'form-control'
+        = r.error_messages_for(:name, class: "bg-danger")
+        .from-group.row
+          .col-md-6
+            = r.label :times_of_day
+          .col-md-6
+            = r.select(:times_of_day, [['ночь'], ['день']]  , {}, {:class => 'form-control'})
+        = r.error_messages_for(:times_of_day, class: "bg-danger")
+        .from-group.row
+          .col-md-6
+            = r.label :how_far
+          .col-md-6 
+            = r.select(:how_far, [['В пределах МКАД'], ['За МКАД'], ['Подмосковье']] , {}, {:class => 'form-control'})
+        = r.error_messages_for(:how_far, class: "bg-danger")
+        .from-group.row
+          .col-md-6
+            = r.label :PPK
+          .col-md-6
+            = r.text_field :PPK, class: 'form-control'
+        = r.error_messages_for(:PPK, class: "bg-danger")
+        = r.hidden_field(:id)

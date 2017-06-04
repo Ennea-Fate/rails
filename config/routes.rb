@@ -3,9 +3,16 @@ Rails.application.routes.draw do
     collection do
       get :search
     end
+    member do
+      get :rate_new
+    end
   end
   resources :rates
-  resources :drivers
+  resources :drivers do
+    member do
+      get :auto_new
+    end
+  end
   resources :autos
   resources :role_users
   resources :roles

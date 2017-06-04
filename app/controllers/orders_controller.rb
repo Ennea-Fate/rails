@@ -18,12 +18,15 @@ class OrdersController < ApplicationController
     @s_auto_model = params.has_key?('search') ? params[:search][:auto_model] : ""
     @s_auto_class = params.has_key?('search') ? params[:search][:auto_class] : ""
     @s_auto_color = params.has_key?('search') ? params[:search][:auto_color] : ""
-    @s_date_from = params.has_key?('search') ? params[:search][:date_from] : ""
-    @s_date_to = params.has_key?('search') ? params[:search][:date_to] : ""
-    @s_time_from = params.has_key?('search') ? params[:search][:time_from] : ""
-    @s_time_to = params.has_key?('search') ? params[:search][:time_to] : ""
-    @s_adress_from = params.has_key?('search') ? params[:search][:adress_from] : ""
-    @s_adress_to = params.has_key?('search') ? params[:search][:adress_to] : ""
+  end
+  
+  def rate_new
+    respond_to do |format|
+      format.js do
+        @order = Order.find(params[:id])
+        @order.rate = Rate.new
+      end
+    end
   end
   
   def index

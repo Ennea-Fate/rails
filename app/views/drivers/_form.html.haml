@@ -54,20 +54,7 @@
       = f.error_messages_for(:passport)
     - if @current_role_user.present? and @current_role_user.is_admin?
       .col-md-6
-        - if (!@driver.new_record?)
-          = f.fields_for(:auto) do |a|
-            = render('auto_form', a: a, f: f, new: false)
-  - if @current_role_user.present? and @current_role_user.is_admin?
-    .col-md-12.center
-      - new_or_select = check_box_tag('new_or_select', 'true', false, data: { :size => 'auto', :animate => 'true', :'on-color' => 'success', :'off-color' => 'warning', :'on-text' => 'Создать', :'off-text' => 'Выбрать', :'label-text' => 'Автомобиль', :'indeterminate' => true} )
-      - if (@driver.new_record? or !@driver.auto)
-        = new_or_select
-      - else
-        .hidden
-          = new_or_select
-      = f.fields_for(:auto, Auto.new) do |a|
-        #new_object_fields{:data => {:content => "#{render('auto_form', a: a, new: true)}"}}
-        #select_object_field{:data => {:content => "#{render('auto_select', f: f)}"}}
+        = render('auto_form', f: f)
   .col-md-6.col-md-offset-3
     .form-actions
       .btn-group

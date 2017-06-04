@@ -61,24 +61,11 @@
           .col-md-4
             = f.label :driver
           .col-md-8
-            = select(:order, :driver_id, Driver.all.collect {|p| [ (p.fn + ' ' + p.sn + ' ' + p.ln), p.id ] }, { include_blank: true }, :data => {'style' => "btn-primary"}, :class => 'form-control',)
+            = select(:order, :driver_id, Driver.all.collect {|p| [ (p.fn + ' ' + p.sn + ' ' + p.ln), p.id ] }, { include_blank: true }, :data => {'style' => "btn-primary"}, :class => 'form-control')
       = f.error_messages_for(:driver, class: "bg-danger" )
     - if @current_role_user.present? and @current_role_user.is_admin?
       .col-md-6
-        - if (!@order.new_record?)
-          = f.fields_for(:rate) do |r|
-            = render('rate_form', r: r, f: f, new: false)
-  - if @current_role_user.present? and @current_role_user.is_admin?
-    .col-md-12.center
-      - new_or_select = check_box_tag('new_or_select', 'true', false, data: { :size => 'auto', :animate => 'true', :'on-color' => 'success', :'off-color' => 'warning', :'on-text' => 'Создать', :'off-text' => 'Выбрать', :'label-text' => 'Тариф', :'indeterminate' => true} )
-      - if (@order.new_record? or !@order.rate)
-        = new_or_select
-      - else
-        .hidden
-          = new_or_select
-      = f.fields_for(:rate, Rate.new) do |r|
-        #new_object_fields{:data => {:content => "#{render('rate_form', r: r, new: true)}"}}
-        #select_object_field{:data => {:content => "#{render('rate_select', f: f)}"}}
+        = render('rate_form', f: f)
   .col-md-6.col-md-offset-3
     .form-actions
       .btn-group

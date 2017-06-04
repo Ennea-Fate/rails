@@ -21,14 +21,33 @@
               .col-md-4
                 = Order.human_attribute_name(:time)
               .col-md-8
-                .input-group.date.datetimepicker
-                  = text_field_tag 'search[time_from]', params['search']['time_from'], class: 'form-control', placeholder: t('search.from')
-                  %span.input-group-addon
-                    %span.glyphicon.glyphicon-calendar
-                .input-group.date.datetimepicker
-                  = text_field_tag 'search[time_to]', params['search']['time_to'], class: 'form-control', placeholder: t('search.to')
-                  %span.input-group-addon
-                    %span.glyphicon.glyphicon-calendar
+                .row
+                  .col-md-6
+                    .input-group.date.timepicker
+                      %span.input-group-addon
+                        %span.glyphicon.glyphicon-calendar
+                      = text_field_tag 'search[time_from]', params['search']['time_from'], class: 'form-control', placeholder: t('search.from')
+                  .col-md-6
+                    .input-group.date.timepicker
+                      = text_field_tag 'search[time_to]', params['search']['time_to'], class: 'form-control', placeholder: t('search.to')
+                      %span.input-group-addon
+                        %span.glyphicon.glyphicon-calendar
+          .form-group
+            .row
+              .col-md-4
+                = Order.human_attribute_name(:date)
+              .col-md-8
+                .row
+                  .col-md-6
+                    .input-group.date.datepicker
+                      %span.input-group-addon
+                        %span.glyphicon.glyphicon-calendar
+                      = text_field_tag 'search[date_from]', params['search']['date_from'], class: 'form-control', placeholder: t('search.from')
+                  .col-md-6
+                    .input-group.date.datepicker
+                      = text_field_tag 'search[date_to]', params['search']['date_to'], class: 'form-control', placeholder: t('search.to')
+                      %span.input-group-addon
+                        %span.glyphicon.glyphicon-calendar
           .form-group
             .row
               .col-md-4
@@ -171,83 +190,121 @@
 - if @orders.size > 0
   .page-header
     %h1= t('search.found') + ": " + @orders.size.to_s
-  - @orders.each do |order|
-    .panel.panel-success
-      .panel-heading
-        = t('app.orders.once') + ' № ' + order.id.to_s
-      .panel-body
-        .row
-          .col-md-4
-            .left
-              = Order.human_attribute_name(:time)
-          .col-md-8
-            .left
-              = order.time.strftime("%H:%M")
-        .row
-          .col-md-4
-            .left
-              = Driver.human_attribute_name(:auto)
-              %br
-              = Auto.human_attribute_name(:model)
-              %br
-              = Auto.human_attribute_name(:number)
-              %br
-              = Auto.human_attribute_name(:class)
-          .col-md-8
-            .left
-              %br
-              = "  #{order.driver.auto.model}"
-              %br
-              = "  #{order.driver.auto.number}"
-              %br
-              = "  #{order.driver.auto.myclass}"
-        .row
-          .col-md-4
-            .left
-              = Order.human_attribute_name(:from_adress)
-          .col-md-8
-            .left
-              = order.from_adress
-        .row
-          .col-md-4
-            .left
-              = Order.human_attribute_name(:to_adress)
-          .col-md-8
-            .left
-              = order.to_adress
-        .row
-          .col-md-4
-            .left
-              = Order.human_attribute_name(:rate)
-              %br
-              = Rate.human_attribute_name(:name)
-              %br
-              = Rate.human_attribute_name(:times_of_day)
-              %br
-              = Rate.human_attribute_name(:how_far)
-              %br
-              = Rate.human_attribute_name(:PPK)
-          .col-md-8
-            .left
-              %br
-              = "  #{order.rate.name}"
-              %br
-              = "  #{order.rate.times_of_day}"
-              %br
-              = "  #{order.rate.how_far}"
-              %br
-              = "  #{order.rate.PPK} руб./км}"
-        .row
-          .col-md-4
-            .left
-              = Order.human_attribute_name(:passangers_count)
-          .col-md-8
-            .left
-              = order.passangers_count
-        .row
-          .col-md-4
-            .left
-              = Order.human_attribute_name(:lenght_of_the_route)
-          .col-md-8
-            .left
-              = order.lenght_of_the_route       
+  
+  %table.table-responsive
+    %tr
+    - @orders.each do |order|
+      %td
+        .panel.panel-success
+          .panel-heading
+            = t('app.orders.once') + ' № ' + order.id.to_s
+          .panel-body
+            %table.table.table-striped.table-condensed.table-hover
+              %tr
+                %td
+                  = Order.human_attribute_name(:time)
+                %td
+                  = order.time.strftime("%H:%M")
+              %tr
+                %td
+                  = Order.human_attribute_name(:from_adress)
+                %td
+                  = order.from_adress
+              %tr
+                %td
+                  = Order.human_attribute_name(:to_adress)
+                %td
+                  = order.to_adress
+              %tr
+                %td
+                  = Order.human_attribute_name(:passangers_count)
+                %td
+                  = order.passangers_count
+              %tr
+                %td
+                  = Order.human_attribute_name(:lenght_of_the_route)
+                %td
+                  = order.lenght_of_the_route
+            %table.table.table-striped.table-condensed.table-hover
+              %thead
+                %tr
+                  %th{colspan: "2"}
+                    = Driver.human_attribute_name(:auto)
+              %tbody
+                %tr
+                  %td
+                    = Auto.human_attribute_name(:model)
+                  %td
+                    = "#{order.driver.auto.model}"
+                %tr
+                  %td
+                    = Auto.human_attribute_name(:number)
+                  %td
+                    = "#{order.driver.auto.number}"
+                %tr
+                  %td
+                    = Auto.human_attribute_name(:class)
+                  %td
+                    = "#{order.driver.auto.myclass}"
+            %table.table.table-striped.table-condensed.table-hover
+              %thead
+                %tr
+                  %th{colspan: "2"}
+                    = Order.human_attribute_name(:rate)
+              %tbody
+                %tr
+                  %td
+                    = Rate.human_attribute_name(:name)
+                  %td
+                    = "#{order.rate.name}"
+                %tr
+                  %td
+                    = Rate.human_attribute_name(:times_of_day)
+                  %td
+                    = "#{order.rate.times_of_day}"
+                %tr
+                  %td
+                    = Rate.human_attribute_name(:how_far)
+                  %td
+                    = "#{order.rate.how_far}"
+                %tr
+                  %td
+                    = Rate.human_attribute_name(:PPK)
+                  %td
+                    = "#{order.rate.PPK} руб./км}"
+            %table.table.table-striped.table-condensed.table-hover
+              %thead
+                %tr
+                  %th{colspan: "2"}
+                    = Order.human_attribute_name(:driver)
+              %tbody
+                %tr
+                  %td
+                    = Driver.human_attribute_name(:fn)
+                  %td
+                    = "#{order.driver.fn}"
+                %tr
+                  %td
+                    = Driver.human_attribute_name(:sn)
+                  %td
+                    = "#{order.driver.sn}"
+                %tr
+                  %td
+                    = Driver.human_attribute_name(:ln)
+                  %td
+                    = "#{order.driver.ln}"
+                %tr
+                  %td
+                    = Driver.human_attribute_name(:birthdate)
+                  %td
+                    = "#{order.driver.birthdate}"
+                %tr
+                  %td
+                    = Driver.human_attribute_name(:TIN)
+                  %td
+                    = "#{order.driver.TIN}"
+                %tr
+                  %td
+                    = Driver.human_attribute_name(:passport)
+                  %td
+                    = "#{order.driver.passport}"
